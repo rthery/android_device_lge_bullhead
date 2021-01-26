@@ -202,7 +202,7 @@ TARGET_USES_ALTERNATIVE_MANUAL_NETWORK_SELECT := true
 TARGET_FLATTEN_APEX := true
 
 # Limit cpus for blod patch
-ifeq ($(TARGET_PRODUCT),lineage_bullhead_blod)
+ifeq ($(TARGET_PRODUCT),arrow_bullhead_blod)
 BOARD_KERNEL_CMDLINE += boot_cpus=0-3 maxcpus=4
 endif
 

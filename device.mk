@@ -34,7 +34,7 @@ WITH_DEXPREOPT_PIC := true
 TARGET_USES_CHINOOK_SENSORHUB := false
 
 # Select init.bullhead.rc depending on target (blod fix)
-ifeq ($(TARGET_PRODUCT),lineage_bullhead_blod)
+ifeq ($(TARGET_PRODUCT),arrow_bullhead_blod)
 PRODUCT_COPY_FILES += \
     device/lge/bullhead/init.bullhead_blod.rc:root/init.bullhead.rc
 else
@@ -169,7 +169,7 @@ PRODUCT_COPY_FILES += \
     device/lge/bullhead/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
 
 # Power configuration file depending on target (blod fix)
-ifeq ($(TARGET_PRODUCT),lineage_bullhead_blod)
+ifeq ($(TARGET_PRODUCT),arrow_bullhead_blod)
 PRODUCT_COPY_FILES += \
     device/lge/bullhead/init.bullhead_blod.power.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.bullhead.power.sh
 else
@@ -317,7 +317,6 @@ PRODUCT_PACKAGES += \
     libmmcamera_interface2 \
     libmmjpeg_interface \
     libqomx_core \
-    mm-qcamera-app \
     android.hardware.camera.provider@2.4-impl \
     camera.device@1.0-impl \
     camera.device@3.2-impl \
@@ -400,7 +399,6 @@ PRODUCT_PACKAGES += \
 
 DEVICE_PACKAGE_OVERLAYS := \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage
 
 # Enable AAC 5.1 output
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -608,10 +606,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
     android.hardware.gnss@1.0-service
-
-# Trust HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
 
 #USB HAL
 PRODUCT_PACKAGES += \

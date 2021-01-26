@@ -2,19 +2,19 @@
   {
     "repository"  : "Toomoch/kernel_lge_bullhead",
     "target_path" : "kernel/lge/bullhead",
-    "branch"      : "lineage-17.1",
+    "branch"      : "arrow-10.0",
     "remote"      : "github"
   },
   {
     "repository"  : "Toomoch/android_vendor_lge_bullhead",
     "target_path" : "vendor/lge/bullhead",
-    "branch"      : "lineage-17.1",
+    "branch"      : "arrow-10.0",
     "remote"      : "github"
   },
   {
-    "repository"  : "LineageOS/android_hardware_sony_timekeep",
+    "repository"  : "ArrowOS/android_hardware_sony_timekeep",
     "target_path" : "hardware/sony/timekeep",
-    "branch"      : "lineage-17.1",
+    "branch"      : "arrow-10.0",
     "remote"      : "github"
   }
 ]
