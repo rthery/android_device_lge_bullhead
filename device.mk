@@ -101,6 +101,7 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio.r_submix.default \
     libaudio-resampler \
+    libaudioroute \
     libqcomvoiceprocessing \
     libqcomvoiceprocessingdescriptors \
     libqcomvisualizer \
@@ -284,6 +285,7 @@ PRODUCT_COPY_FILES += \
 # Media
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
+    libminijail_32 \
     libstagefrighthw \
     libOmxCore \
     libmm-omxcore \
