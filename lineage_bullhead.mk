@@ -43,8 +43,7 @@ $(call inherit-product, device/lge/bullhead/device.mk)
 $(call inherit-product, vendor/lge/bullhead/bullhead-vendor.mk)
 
 PRODUCT_PACKAGES += \
-    Launcher3 \
-    WallpaperPicker
+    Launcher3
 
 
 
