@@ -1,4 +1,12 @@
 cc_library_shared {
+    name: "libbullhead_ril_audio",
+    srcs: ["ril_audio.cpp"],
+    shared_libs: ["android.hardware.audio@6.0", "libhidlbase", "libutils", "liblog"],
+    vendor: true,
+    compile_multilib: "64",
+}
+
+cc_library_shared {
     srcs: ["libaudioclient_shim.cpp"],
     name: "libaudioclient_shim",
     shared_libs: ["libaudioclient"],
@@ -29,4 +37,20 @@ cc_library_shared {
     shared_libs: ["liblog"],
     name: "libprotobuf_shim",
     vendor: true,
+}
+
+cc_library_shared {
+    name: "libbullhead_peripheral_binder",
+    srcs: ["peripheral_binder.cpp"],
+    shared_libs: ["libbinder", "libutils"],
+    vendor: true,
+    compile_multilib: "64",
+}
+
+cc_library_shared {
+    name: "libbullhead_ims_surface",
+    srcs: ["ims_surface.cpp"],
+    shared_libs: ["libgui", "libutils", "libbinder"],
+    vendor: true,
+    compile_multilib: "64",
 }

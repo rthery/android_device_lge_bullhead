@@ -23,6 +23,8 @@ ro.audio.flinger_standbytime_ms=300
 # Bluetooth
 qcom.bluetooth.soc=rome
 bluetooth.enable_timeout_ms=12000
+# Rome firmware does not implement the newer APCF extended-features query.
+bluetooth.le.disable_apcf_extended_features=1
 ro.boot.btmacaddr=00:00:00:00:00:00
 ro.bt.bdaddr_path=/persist/bdaddr.txt
 persist.sys.bt.max_vendor_cap=0

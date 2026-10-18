@@ -2,6 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <utils/Looper.h>
+
+// The legacy liboemcamera Looper allocation is enlarged by the blob patcher.
+// Keep this bound paired with scripts/patch-bullhead-camera-looper.py.
+#if !defined(__LP64__)
+static_assert(sizeof(android::Looper) <= 248, "Legacy camera Looper allocation too small");
+#endif
 
 namespace android {
     //android::String16::String16(char const*)

@@ -77,6 +77,9 @@ endif
 LOCAL_SHARED_LIBRARIES := libcamera_client liblog libhardware libutils libcutils libdl libsync
 LOCAL_SHARED_LIBRARIES += libmmcamera_interface libmmjpeg_interface libui libcamera_metadata
 LOCAL_SHARED_LIBRARIES += libqdMetaData libstagefrighthw
+# JPEG codecs initialize BoringSSL TLS on camera workers. Keep libcrypto loaded
+# until those workers exit, even when the codec itself has been unloaded.
+LOCAL_SHARED_LIBRARIES += libcrypto
 
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_MODULE := camera.$(TARGET_BOARD_PLATFORM)

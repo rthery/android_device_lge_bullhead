@@ -36,7 +36,7 @@ PRODUCT_AAPT_PREBUILT_DPI := xxhdpi xhdpi hdpi
 PRODUCT_CHARACTERISTICS := nosdcard
 
 # Dexpreopt
-WITH_DEXPREOPT := true
+WITH_DEXPREOPT := false
 WITH_DEXPREOPT_PIC := true
 
 # Permissions
@@ -86,6 +86,8 @@ PRODUCT_COPY_FILES += \
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
+    android.hardware.radio.deprecated@1.0 \
+    libaudiohal@2.0 \
     android.hardware.audio.service \
     android.hardware.audio@6.0 \
     android.hardware.audio@6.0-impl \
@@ -465,3 +467,13 @@ endif
 
 $(call inherit-product-if-exists, hardware/qcom/msm8994/msm8992.mk)
 $(call inherit-product-if-exists, vendor/qcom/gpu/msm8994/msm8994-gpu-vendor.mk)
+
+# Keep the legacy peripheral manager on its clients' vendor binder bus.
+PRODUCT_PACKAGES += libbullhead_peripheral_binder
+
+# Legacy modem clients cannot reach framework suspend through vendor binder.
+PRODUCT_VENDOR_PROPERTIES += ro.vendor.power.legacy_wakelocks=true
+
+PRODUCT_PACKAGES += libbullhead_ims_surface
+PRODUCT_PACKAGES += libbullhead_ril_audio
+PRODUCT_PACKAGES += bullhead_gps_debug.conf

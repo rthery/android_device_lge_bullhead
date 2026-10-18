@@ -215,6 +215,8 @@ WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WIFI_AVOID_IFACE_RESET_MAC_CHANGE := true
 
+MALLOC_SVELTE := true
+
 ifeq ($(TARGET_PRODUCT),aosp_bullhead_svelte)
 BOARD_KERNEL_CMDLINE += mem=1024M maxcpus=2
 MALLOC_SVELTE := true
@@ -225,3 +227,8 @@ MALLOC_SVELTE := true
 endif
 
 -include vendor/lge/bullhead/BoardConfigVendor.mk
+
+# Keep the legacy HIDL audio startup used by the working bullhead ROM.
+SOONG_CONFIG_NAMESPACES += android_hardware_audio
+SOONG_CONFIG_android_hardware_audio += legacy_hidl
+SOONG_CONFIG_android_hardware_audio_legacy_hidl := true
