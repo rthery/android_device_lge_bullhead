@@ -4,10 +4,12 @@
 #include <stdint.h>
 #include <utils/Looper.h>
 
-// The legacy liboemcamera Looper allocation is enlarged by the blob patcher.
-// Keep this bound paired with scripts/patch-bullhead-camera-looper.py.
+// The legacy liboemcamera and slim_daemon Looper allocations are enlarged by
+// scripts/patch-bullhead-camera-looper.py and patch-bullhead-slim-looper.py.
 #if !defined(__LP64__)
 static_assert(sizeof(android::Looper) <= 248, "Legacy camera Looper allocation too small");
+#else
+static_assert(sizeof(android::Looper) <= 264, "Legacy slim_daemon Looper allocation too small");
 #endif
 
 namespace android {
