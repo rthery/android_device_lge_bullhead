@@ -57,3 +57,6 @@ PRODUCT_PACKAGES += \
 
 
 
+# This custom build uses its own per-device OTA feed, a GitHub release asset.
+PRODUCT_SYSTEM_PROPERTIES += \
+    lineage.updater.uri=https://github.com/rthery/android_builds/releases/download/ota-feed/{device}-{type}.json
