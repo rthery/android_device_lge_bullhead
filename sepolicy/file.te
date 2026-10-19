@@ -36,6 +36,13 @@ type cnd_data_file, file_type, data_file_type, core_data_file_type;
 
 type nfc_vendor_data_file, file_type, data_file_type;
 
+# Device-specific radio data labels. Android 13 labels /data/misc/radio as
+# radio_core_data_file, while the legacy vendor services need narrowly scoped
+# access to their database and modem configuration files.
+type bullhead_radio_db_file, file_type, data_file_type, core_data_file_type;
+type bullhead_radio_id_file, file_type, data_file_type, core_data_file_type;
+type bullhead_modem_config_data_file, file_type, data_file_type, core_data_file_type;
+
 type sysfs_smdcntl_open_timeout, fs_type, sysfs_type;
 
 type sysfs_devices_fingerprint,  sysfs_type, fs_type;

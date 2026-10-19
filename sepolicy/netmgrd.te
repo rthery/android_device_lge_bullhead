@@ -48,8 +48,8 @@ allowxperm netmgrd self:socket ioctl msm_sock_ipc_ioctls;
 # CONFIG_MODULES not set in bullhead_defconfig
 dontaudit netmgrd self:capability sys_module;
 
-# Set net_radio properties
-set_prop(netmgrd, net_radio_prop)
+# Set only the legacy reverse-rmnet selector, if the binary uses it.
+set_prop(netmgrd, netmgrd_rmnet_prop)
 
 #Allow access to files associated with netd
 allow netmgrd net_data_file:file r_file_perms;

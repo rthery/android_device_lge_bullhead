@@ -16,5 +16,5 @@ set_prop(start_hci_filter, wc_transport_prop)
 
 allow start_hci_filter vendor_file:dir r_dir_perms;
 
-# Allow reading Bluetooth-related system properties
-get_prop(start_hci_filter, bluetooth_prop)
+# The legacy filter reads only these two vendor Bluetooth properties.
+get_prop(start_hci_filter, bluetooth_filter_prop)

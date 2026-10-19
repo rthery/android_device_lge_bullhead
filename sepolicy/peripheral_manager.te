@@ -37,3 +37,10 @@ allow per_mgr sysfs_msm_subsys:lnk_file { read open };
 binder_call(per_mgr, per_mgr);
 
 allow per_mgr subsys_modem_device:chr_file r_file_perms;
+
+# Legacy Qualcomm services communicate over the vendor Binder device.
+vndbinder_use(per_mgr)
+
+# pm-service registers on /dev/vndbinder; rild looks it up there.
+allow per_mgr per_mgr_vndservice:service_manager { add find };
+allow rild per_mgr_vndservice:service_manager find;

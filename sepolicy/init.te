@@ -49,3 +49,6 @@ allow init firmware_file:dir mounton;
 allow init sysfs_rndis:file rw_file_perms;
 
 allow init sysfs_poweroff:file rw_file_perms;
+
+# Device init boots ADSP through /sys/kernel/boot_adsp/boot and sets its group.
+allow init sysfs_audio:file { open write setattr };

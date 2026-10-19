@@ -1,6 +1,15 @@
-type wc_transport_prop, property_type;
-type qseecomtee_prop, property_type;
-type radio_atfwd_prop, property_type;
-type qcom_ims_prop, property_type;
-type contexthub_prop, property_type;
-type vendor_timekeep_prop, property_type;
+vendor_internal_prop(wc_transport_prop)
+vendor_restricted_prop(qseecomtee_prop)
+vendor_internal_prop(radio_atfwd_prop)
+vendor_internal_prop(qcom_ims_prop)
+vendor_public_prop(contexthub_prop)
+vendor_public_prop(vendor_timekeep_prop)
+vendor_internal_prop(netmgrd_rmnet_prop)
+vendor_internal_prop(bluetooth_filter_prop)
+vendor_internal_prop(bullhead_camera_prop)
+vendor_internal_prop(bullhead_radio_config_prop)
+vendor_internal_prop(bullhead_display_prop)
+vendor_internal_prop(bullhead_video_prop)
+vendor_internal_prop(bullhead_audio_prop)
+vendor_internal_prop(bullhead_perf_prop)
+vendor_internal_prop(bullhead_wlan_prop)

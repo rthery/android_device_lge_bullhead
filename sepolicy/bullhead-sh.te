@@ -8,6 +8,16 @@ init_daemon_domain(bullhead-sh)
 allow bullhead-sh radio_data_file:file create_file_perms;
 allow bullhead-sh radio_data_file:dir create_dir_perms;
 
+# The parent directory keeps the Android 13 core label. Only directory entry
+# operations are needed there; the copied modem tree has its own device label.
+allow bullhead-sh radio_core_data_file:dir { add_name create getattr open read remove_name search write };
+allow bullhead-sh bullhead_modem_config_data_file:dir create_dir_perms;
+allow bullhead-sh bullhead_modem_config_data_file:file create_file_perms;
+
+# The script recreates modem_config on every boot; its contents inherit this label.
+type_transition bullhead-sh radio_core_data_file:dir bullhead_modem_config_data_file "modem_config";
+type_transition bullhead-sh radio_core_data_file:file bullhead_modem_config_data_file "copy_complete";
+
 # Chwon /data/misc/radio/modem_config
 allow bullhead-sh self:capability chown;
 

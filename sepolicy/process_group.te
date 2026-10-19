@@ -1,0 +1,13 @@
+# The 3.10 kernel has no cgroup v2, so libprocessgroup keeps its uid/pid
+# hierarchy in the plain tmpfs directory init creates at /dev/cg2_bpf.
+type process_group_tmpfs, file_type;
+allow process_group_tmpfs tmpfs:filesystem associate;
+type_transition init device:dir process_group_tmpfs "cg2_bpf";
+
+allow init process_group_tmpfs:dir { create_dir_perms mounton };
+allow init process_group_tmpfs:file create_file_perms;
+allow { zygote webview_zygote app_zygote } process_group_tmpfs:dir create_dir_perms;
+allow { zygote webview_zygote app_zygote } process_group_tmpfs:file create_file_perms;
+allow system_server process_group_tmpfs:dir { r_dir_perms remove_name rmdir write };
+allow system_server process_group_tmpfs:file r_file_perms;
+allow netd process_group_tmpfs:dir r_dir_perms;

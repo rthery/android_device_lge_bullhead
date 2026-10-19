@@ -1,0 +1,10 @@
+# Readers of the properties labeled in property_contexts.
+get_prop({ camera hal_camera_default }, bullhead_camera_prop)
+get_prop({ rild ims qti atfwd }, bullhead_radio_config_prop)
+get_prop({ hal_bluetooth_default wcnss_service }, bluetooth_filter_prop)
+get_prop({ hal_graphics_composer_default hal_graphics_allocator_default }, bullhead_display_prop)
+get_prop(mediacodec, bullhead_video_prop)
+get_prop(hal_audio_default, bullhead_audio_prop)
+get_prop(perfd, bullhead_perf_prop)
+set_prop(hal_wifi_default, bullhead_wlan_prop)
+get_prop(hal_graphics_composer_default, bootanim_system_prop)

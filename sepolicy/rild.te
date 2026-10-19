@@ -2,6 +2,7 @@ binder_call(rild, audioserver)
 binder_call(rild, mediaserver)
 binder_use(rild)
 binder_service(rild)
+vndbinder_use(rild)
 
 # Grant access to Qualcomm MSM Interface (QMI) radio sockets to RILD
 qmux_socket(rild)
@@ -26,6 +27,25 @@ allow rild time_daemon:unix_stream_socket connectto;
 
 # rild reads qcril.db linked to /system/etc/qcril.db
 allow rild radio_data_file:lnk_file read;
+
+# Android 13 labels /data/misc/radio as radio_core_data_file. rild needs the
+# directory operations for qcril.db's SQLite journal, and access only to the
+# explicitly labeled database and SIM identity files below.
+allow rild radio_core_data_file:dir rw_dir_perms;
+allow rild bullhead_radio_db_file:file { create getattr ioctl lock open read setattr unlink write };
+allow rild bullhead_radio_id_file:file rw_file_perms;
+
+# rild reads the copied modem configuration tree.
+allow rild bullhead_modem_config_data_file:dir r_dir_perms;
+allow rild bullhead_modem_config_data_file:file r_file_perms;
+
+# Label newly created SQLite database and sidecar files at creation time.
+type_transition init radio_core_data_file:file bullhead_radio_db_file "qcril.db";
+type_transition rild radio_core_data_file:file bullhead_radio_db_file "qcril.db-journal";
+type_transition rild radio_core_data_file:file bullhead_radio_db_file "qcril.db-wal";
+type_transition rild radio_core_data_file:file bullhead_radio_db_file "qcril.db-shm";
+type_transition rild radio_core_data_file:file bullhead_radio_id_file "iccid_0";
+type_transition rild radio_core_data_file:file bullhead_radio_id_file "dummy_file";
 
 # allow rild to access radio data file
 allow rild radio_data_file:dir rw_dir_perms;
