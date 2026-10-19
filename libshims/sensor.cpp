@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <sensor/SensorEventQueue.h>
+#include <sensor/SensorManager.h>
 #include <utils/Looper.h>
 
 // The legacy liboemcamera and slim_daemon Looper allocations are enlarged by
@@ -12,22 +14,13 @@ static_assert(sizeof(android::Looper) <= 248, "Legacy camera Looper allocation t
 static_assert(sizeof(android::Looper) <= 264, "Legacy slim_daemon Looper allocation too small");
 #endif
 
-namespace android {
-    //android::String16::String16(char const*)
-    extern "C" void _ZN7android8String16C1EPKc(void **str16P, const char *str);
+// Legacy createEventQueue(String8, int), defined as a free function so the
+// compiler applies the member call ABI (sret and this) on both arm and arm64.
+android::sp<android::SensorEventQueue> legacyCreateEventQueue(
+        android::SensorManager* manager, android::String8 packageName, int mode)
+        __asm__("_ZN7android13SensorManager16createEventQueueENS_7String8Ei");
 
-    //android::String16::~String16()
-    extern "C" void _ZN7android8String16D1Ev(void **str16P);
-
-    extern "C" void _ZN7android13SensorManager16createEventQueueENS_7String8EiNS_8String16E(void **retVal, void *sensorMgr, void **str8P, int mode, void **str16P);
-
-    extern "C" void _ZN7android13SensorManager16createEventQueueENS_7String8Ei(void **retVal, void *sensorMgr, void **str8P, int mode)
-    {
-        void *string;
-
-        _ZN7android8String16C1EPKc(&string, "");
-        _ZN7android13SensorManager16createEventQueueENS_7String8EiNS_8String16E(retVal, sensorMgr, str8P, mode, &string);
-        _ZN7android8String16D1Ev(&string);
-    }
-
+android::sp<android::SensorEventQueue> legacyCreateEventQueue(
+        android::SensorManager* manager, android::String8 packageName, int mode) {
+    return manager->createEventQueue(packageName, mode, android::String16(""));
 }
