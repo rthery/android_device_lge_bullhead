@@ -72,7 +72,7 @@ def IncrementalOTA_InstallEnd(info):
     else:
       WriteBootloader(info, target_bootloader_img)
   except KeyError:
-    print ("no bootloader.img in target target_files; skipping install"())
+    print("no bootloader.img in target target_files; skipping install")
 
   tf = FindRadio(info.target_zip)
   if not tf:
