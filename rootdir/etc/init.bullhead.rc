@@ -333,7 +333,6 @@ service netmgrd /vendor/bin/netmgrd
     group radio system wakelock
 
 service per_mgr /vendor/bin/pm-service
-    setenv LD_PRELOAD /vendor/lib64/libbullhead_peripheral_binder.so
     class core
     user system
     group system net_raw

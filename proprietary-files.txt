@@ -91,7 +91,7 @@ bin/netmgrd:vendor/bin/netmgrd|1e1e2638e67291d3b63c1b2693eeff5e5e7d0b6b
 bin/nl_listener:vendor/bin/nl_listener|630588635ecbd61d8bffef663d83c5eed2d801b8
 bin/perfd:vendor/bin/perfd|445f50c9bb5dfd20ff9da5dd58bd0b899731cc25
 bin/pm-proxy:vendor/bin/pm-proxy|970e4719ec43e8a3f4968fbb2b0b417189f6c7f5
-bin/pm-service:vendor/bin/pm-service|d929bc8664ff4056ec5b120b7c31934ae0f85b0e
+bin/pm-service:vendor/bin/pm-service|d929bc8664ff4056ec5b120b7c31934ae0f85b0e|1f9d2e36b1cfa6ac0ec0fab59dd3c267646456d8
 bin/port-bridge:vendor/bin/port-bridge|bef9d872b1e387cefe8f7bb025154480da4ca79f
 bin/qmakernote-xtract:vendor/bin/qmakernote-xtract|21357c421d1515017d2174d0ad42e312d22410ed
 bin/qmuxd:vendor/bin/qmuxd|0ccd2eda6e6b95c53010e2d947a0747fe9fb35da

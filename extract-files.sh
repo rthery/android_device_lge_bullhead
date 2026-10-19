@@ -85,6 +85,10 @@ function blob_fixup() {
             zip -dq "${2}" "META-INF/*.RSA" "META-INF/*.SF" || exit 1
             zip -gjqX "${2}" "${work}/classes.dex" || exit 1
             ;;
+        vendor/bin/pm-service)
+            # Register on /dev/vndbinder, where its vendor clients look it up.
+            "${PATCHELF}" --add-needed "libbullhead_peripheral_binder.so" "${2}" || exit 1
+            ;;
         vendor/bin/slim_daemon)
             # Allocate the Android 13 Looper size (264) instead of 8.1's 224.
             patch_bytes "${2}" 0x12a20 e00b1b32bbebff97e1031f2af60300aabcebff97 00218052
