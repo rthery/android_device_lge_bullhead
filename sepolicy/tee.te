@@ -44,6 +44,7 @@ allow tee time_daemon:unix_stream_socket connectto;
 
 # allow tee to access data partition
 allow tee system_data_file:dir r_dir_perms;
+allow tee system_data_root_file:dir r_dir_perms;
 allow tee vendor_file:dir r_dir_perms;
 
 # fingerprint (HAL)
