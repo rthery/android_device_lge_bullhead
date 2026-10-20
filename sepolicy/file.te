@@ -36,6 +36,9 @@ type cnd_data_file, file_type, data_file_type, core_data_file_type;
 
 type nfc_vendor_data_file, file_type, data_file_type;
 
+# Sensor calibration written by the passthrough sensors HAL in system_server.
+type sensors_vendor_data_file, file_type, data_file_type;
+
 # Device-specific radio data labels. Android 13 labels /data/misc/radio as
 # radio_core_data_file, while the legacy vendor services need narrowly scoped
 # access to their database and modem configuration files.

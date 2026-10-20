@@ -33,7 +33,7 @@ allow rild radio_data_file:lnk_file read;
 # explicitly labeled database and SIM identity files below.
 allow rild radio_core_data_file:dir rw_dir_perms;
 allow rild bullhead_radio_db_file:file { create getattr ioctl lock open read setattr unlink write };
-allow rild bullhead_radio_id_file:file rw_file_perms;
+allow rild bullhead_radio_id_file:file create_file_perms;
 
 # rild reads the copied modem configuration tree.
 allow rild bullhead_modem_config_data_file:dir r_dir_perms;

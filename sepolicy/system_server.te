@@ -50,3 +50,7 @@ allow system_server crash_dump:process getpgid;
 allow system_server sysfs_leds:file write;
 
 binder_call(system_server, hal_camera_default)
+
+# Passthrough sensors HAL keeps its calibration and nanohub_lock under /data/vendor/sensor.
+allow { system_server hal_sensors_default hal_contexthub } sensors_vendor_data_file:dir create_dir_perms;
+allow { system_server hal_sensors_default hal_contexthub } sensors_vendor_data_file:file create_file_perms;
