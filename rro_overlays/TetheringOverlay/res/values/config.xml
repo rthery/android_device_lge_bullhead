@@ -54,4 +54,13 @@
         <item>"bt-pan"</item>
     </string-array>
 
+    <!-- macOS has no RNDIS driver but supports CDC NCM. -->
+    <string-array translatable="false" name="config_tether_ncm_regexs">
+        <item>"ncm\\d"</item>
+    </string-array>
+
+    <!-- Which USB function should be enabled when TETHERING_USB is requested. 0: RNDIS, 1: NCM.
+         -->
+    <integer translatable="false" name="config_tether_usb_functions">1</integer>
+
 </resources>
