@@ -9,5 +9,5 @@ get_prop(perfd, bullhead_perf_prop)
 set_prop(hal_wifi_default, bullhead_wlan_prop)
 get_prop(hal_graphics_composer_default, bootanim_system_prop)
 
-# The HWC polls unset hw.cabl.* and persist.sys.* display overrides.
+# The HWC reads unset persist.sys.* display overrides.
 dontaudit hal_graphics_composer_default system_prop:file r_file_perms;

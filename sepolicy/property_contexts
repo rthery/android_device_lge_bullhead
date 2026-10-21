@@ -21,6 +21,7 @@ ro.min_freq_                       u:object_r:bullhead_perf_prop:s0
 vendor.wlan.                       u:object_r:bullhead_wlan_prop:s0
 persist.audio.fluence.             u:object_r:bullhead_audio_prop:s0
 sys.hwc.                           u:object_r:bullhead_display_prop:s0
+hw.cabl.                           u:object_r:bullhead_display_prop:s0
 persist.mdp3.                      u:object_r:bullhead_display_prop:s0
 persist.mdpcomp                    u:object_r:bullhead_display_prop:s0
 persist.metadata_dynfps.           u:object_r:bullhead_display_prop:s0
