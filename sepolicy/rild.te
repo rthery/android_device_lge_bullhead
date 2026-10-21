@@ -4,6 +4,9 @@ binder_use(rild)
 binder_service(rild)
 vndbinder_use(rild)
 
+# libbullhead_ril_audio forwards QCRIL call state to the audio HAL.
+hal_client_domain(rild, hal_audio)
+
 # Grant access to Qualcomm MSM Interface (QMI) radio sockets to RILD
 qmux_socket(rild)
 
