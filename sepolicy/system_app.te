@@ -19,3 +19,5 @@ allow system_app atfwd_service:service_manager add;
 
 allow system_app proc_pagetypeinfo:file r_file_perms;
 allow system_app sysfs_zram:dir search;
+
+dontaudit system_app { system_suspend_control_service system_suspend_control_internal_service }:service_manager find;
