@@ -228,7 +228,7 @@ endif
 
 -include vendor/lge/bullhead/BoardConfigVendor.mk
 
-# Keep the legacy HIDL audio startup used by the working bullhead ROM.
+# Register the audio@2.0 HAL and skip the AIDL thread pool in the audio service.
 SOONG_CONFIG_NAMESPACES += android_hardware_audio
 SOONG_CONFIG_android_hardware_audio += legacy_hidl
 SOONG_CONFIG_android_hardware_audio_legacy_hidl := true

@@ -6,8 +6,8 @@
 #include <sensor/SensorManager.h>
 #include <utils/Looper.h>
 
-// The legacy liboemcamera and slim_daemon Looper allocations are enlarged by
-// scripts/patch-bullhead-camera-looper.py and patch-bullhead-slim-looper.py.
+// blob_fixup in extract-files.sh enlarges the legacy liboemcamera and
+// slim_daemon Looper allocations to these sizes.
 #if !defined(__LP64__)
 static_assert(sizeof(android::Looper) <= 248, "Legacy camera Looper allocation too small");
 #else

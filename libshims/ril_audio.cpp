@@ -1,3 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Romain Théry
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 // Legacy QCRIL runs on vendor binder. Forward its global HAL parameters over
 // hardware binder instead of waiting for framework AudioFlinger on that bus.
 #define LOG_TAG "bullhead_ril_audio"
