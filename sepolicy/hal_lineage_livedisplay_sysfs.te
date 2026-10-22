@@ -1,0 +1,2 @@
+# The rgb node lives in the fb0 sysfs directory.
+allow hal_lineage_livedisplay_sysfs sysfs_graphics:dir search;
