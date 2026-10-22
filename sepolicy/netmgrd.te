@@ -77,3 +77,4 @@ wakelock_use(netmgrd)
 
 dontaudit netmgrd servicemanager:binder call;
 dontaudit netmgrd dnsresolver_service:service_manager find;
+dontaudit netmgrd netd_service:service_manager find;

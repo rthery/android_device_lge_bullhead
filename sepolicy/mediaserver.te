@@ -14,3 +14,6 @@ allow mediaserver perfd:unix_stream_socket connectto;
 allow mediaserver tee_device:chr_file { ioctl open read write };
 
 allow mediaserver kernel:system { module_request };
+
+# Maps a client UID to its package name.
+allow mediaserver package_native_service:service_manager find;
