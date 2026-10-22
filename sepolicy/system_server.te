@@ -54,3 +54,6 @@ binder_call(system_server, hal_camera_default)
 # Passthrough sensors HAL keeps its calibration and nanohub_lock under /data/vendor/sensor.
 allow { system_server hal_sensors_default hal_contexthub } sensors_vendor_data_file:dir create_dir_perms;
 allow { system_server hal_sensors_default hal_contexthub } sensors_vendor_data_file:file create_file_perms;
+
+# NetworkStatsService sets qtaguid counter sets and deletes tag data on kernels without eBPF.
+allow system_server proc_qtaguid_ctrl:file rw_file_perms;
