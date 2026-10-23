@@ -32,13 +32,13 @@
     </array>
 
     <!-- Power consumption when CPU is suspended -->
-    <item name="cpu.idle">0.075</item>
+    <item name="cpu.suspend">0.075</item>
     <!-- Additional power consumption when CPU is in a kernel idle loop -->
-    <item name="cpu.awake">4.397</item>
+    <item name="cpu.idle">4.397</item>
 
     <!-- Different CPU speeds as reported in
          /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies -->
-    <array name="cpu.speeds.cluster0">
+    <array name="cpu.core_speeds.cluster0">
         <value>384000</value> <!-- 384 MHz CPU speed -->
         <value>460800</value> <!-- 460 MHz CPU speed -->
         <value>600000</value> <!-- 600 MHz CPU speed -->
@@ -51,7 +51,7 @@
     </array>
     <!-- Different CPU speeds as reported in
          /sys/devices/system/cpu/cpu4/cpufreq/scaling_available_frequencies -->
-    <array name="cpu.speeds.cluster1">
+    <array name="cpu.core_speeds.cluster1">
         <value>384000</value> <!-- 384 MHz CPU speed -->
         <value>480000</value> <!-- 480 MHz CPU speed -->
         <value>633600</value> <!-- 633 MHz CPU speed -->
@@ -69,7 +69,7 @@
 
     <!-- Additional power used by a CPU from cluster 0 when running at different
          speeds. Currently this measurement also includes cluster cost. -->
-    <array name="cpu.active.cluster0">
+    <array name="cpu.core_power.cluster0">
         <value>77.358</value> <!-- 384 MHz CPU speed -->
         <value>82.744</value> <!-- 460 MHz CPU speed -->
         <value>85.913</value> <!-- 600 MHz CPU speed -->
@@ -82,7 +82,7 @@
     </array>
     <!-- Additional power used by a CPU from cluster 1 when running at different
          speeds. Currently this measurement also includes cluster cost. -->
-    <array name="cpu.active.cluster1">
+    <array name="cpu.core_power.cluster1">
         <value>132.714</value> <!-- 384 MHz CPU speed -->
         <value>146.321</value> <!-- 480 MHz CPU speed -->
         <value>167.495</value> <!-- 633 MHz CPU speed -->
