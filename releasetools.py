@@ -18,6 +18,18 @@ import common
 import struct
 
 
+# Final factory firmware (OPM7.181205.001); the vendor blobs come from that release.
+SUPPORTED_BOOTLOADERS = ("BHZ32c",)
+
+
+def FullOTA_Assertions(info):
+  info.script.AssertSomeBootloader(*SUPPORTED_BOOTLOADERS)
+
+
+def IncrementalOTA_Assertions(info):
+  info.script.AssertSomeBootloader(*SUPPORTED_BOOTLOADERS)
+
+
 def FindRadio(zipfile):
   try:
     return zipfile.read("RADIO/radio.img")

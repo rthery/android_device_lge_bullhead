@@ -1,1 +1,3 @@
 require board=bullhead
+require version-bootloader=BHZ32c
+require version-baseband=M8994F-2.6.42.5.03
