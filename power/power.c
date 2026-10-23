@@ -665,6 +665,12 @@ static int get_platform_low_power_stats(struct power_module *module,
     return 0;
 }
 
+static void set_feature(struct power_module *module __unused, feature_t feature, int state)
+{
+    if (feature == POWER_FEATURE_DOUBLE_TAP_TO_WAKE)
+        sysfs_write(TAP_TO_WAKE_NODE, state ? "1" : "0");
+}
+
 static int power_open(const hw_module_t* module, const char* name,
                     hw_device_t** device)
 {
@@ -684,6 +690,7 @@ static int power_open(const hw_module_t* module, const char* name,
             dev->init = power_init;
             dev->powerHint = power_hint;
             dev->setInteractive = set_interactive;
+            dev->setFeature = set_feature;
             dev->get_number_of_platform_modes = get_number_of_platform_modes;
             dev->get_platform_low_power_stats = get_platform_low_power_stats;
             dev->get_voter_list = get_voter_list;
@@ -717,6 +724,7 @@ struct power_module HAL_MODULE_INFO_SYM = {
     .init = power_init,
     .powerHint = power_hint,
     .setInteractive = set_interactive,
+    .setFeature = set_feature,
     .get_number_of_platform_modes = get_number_of_platform_modes,
     .get_platform_low_power_stats = get_platform_low_power_stats,
     .get_voter_list = get_voter_list

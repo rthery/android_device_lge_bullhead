@@ -187,6 +187,9 @@
 
     <!-- Enable doze mode
          ComponentName of a dream to show whenever the system would otherwise have gone to sleep. -->
+    <!-- Software double tap to wake through the power HAL; off until the user enables it. -->
+    <bool name="config_supportDoubleTapWake">true</bool>
+
     <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
 
     <!-- Power Management: Specifies whether to decouple the auto-suspend state of the

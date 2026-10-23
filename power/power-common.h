@@ -28,6 +28,7 @@
  */
 #define NODE_MAX (64)
 
+#define TAP_TO_WAKE_NODE "/sys/android_touch/doubletap2wake"
 #define SCALING_GOVERNOR_PATH "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
 #define DCVS_CPU0_SLACK_MAX_NODE "/sys/module/msm_dcvs/cores/cpu0/slack_time_max_us"
 #define DCVS_CPU0_SLACK_MIN_NODE "/sys/module/msm_dcvs/cores/cpu0/slack_time_min_us"
