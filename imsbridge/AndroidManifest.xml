@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 Romain Théry
+     SPDX-License-Identifier: Apache-2.0
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.lineageos.imsbridge"
+    android:sharedUserId="android.uid.phone">
+
+    <!-- Runs in the phone process: the legacy "ims" service is only visible to the radio domain. -->
+    <application
+        android:process="com.android.phone"
+        android:directBootAware="true"
+        android:label="IMS compat bridge">
+        <service
+            android:name=".BridgeImsService"
+            android:exported="true"
+            android:directBootAware="true"
+            android:permission="android.permission.BIND_IMS_SERVICE">
+            <intent-filter>
+                <action android:name="android.telephony.ims.compat.ImsService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.telephony.ims.MMTEL_FEATURE"
+                android:value="true" />
+        </service>
+    </application>
+</manifest>
