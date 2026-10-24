@@ -88,6 +88,8 @@ function blob_fixup() {
         vendor/bin/pm-service)
             # Register on /dev/vndbinder, where its vendor clients look it up.
             "${PATCHELF}" --add-needed "libbullhead_peripheral_binder.so" "${2}" || exit 1
+            # Provide the libutils symbols the current libutils no longer exports.
+            "${PATCHELF}" --add-needed "libutils-v33.so" "${2}" || exit 1
             ;;
         vendor/bin/slim_daemon)
             # Allocate the Android 13 Looper size (264) instead of 8.1's 224.
