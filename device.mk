@@ -403,7 +403,8 @@ PRODUCT_PACKAGES += \
 
 # Soong
 PRODUCT_SOONG_NAMESPACES += \
-    device/lge/bullhead
+    device/lge/bullhead \
+    hardware/qcom/wlan/legacy
 
 # System
 PRODUCT_PROPERTY_OVERRIDES += \
