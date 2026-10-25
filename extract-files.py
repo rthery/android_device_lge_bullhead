@@ -195,6 +195,65 @@ blob_fixups: blob_fixups_user_type = {
         # Legacy SensorManager::createEventQueue(String8, int).
         .patchelf_version(PATCHELF_VERSION)
         .add_needed('libshim_sensor.so'),
+    (
+        'vendor/lib/hw/gatekeeper.msm8992.so',
+        'vendor/lib/lib-dplmedia.so',
+        'vendor/lib/lib-ims-rcscmjni.so',
+        'vendor/lib/lib-imsSDP.so',
+        'vendor/lib/lib-imsdpl.so',
+        'vendor/lib/lib-imsqimf.so',
+        'vendor/lib/lib-imsrcs.so',
+        'vendor/lib/lib-imsrcscm.so',
+        'vendor/lib/lib-imsrcscmclient.so',
+        'vendor/lib/lib-imsrcscmservice.so',
+        'vendor/lib/lib-imss.so',
+        'vendor/lib/lib-imsvt.so',
+        'vendor/lib/lib-imsxml.so',
+        'vendor/lib/lib-rcsimssjni.so',
+        'vendor/lib/lib-rcsjni.so',
+        'vendor/lib/lib-rtpcommon.so',
+        'vendor/lib/lib-rtpcore.so',
+        'vendor/lib/lib-rtpdaemoninterface.so',
+        'vendor/lib/lib-rtpsl.so',
+        'vendor/lib/libQSEEComAPI.so',
+        'vendor/lib/libadm.so',
+        'vendor/lib/libadpcmdec.so',
+        'vendor/lib/libadsprpc.so',
+        'vendor/lib/libcneapiclient.so',
+        'vendor/lib/libconfigdb.so',
+        'vendor/lib/libdrmfs.so',
+        'vendor/lib/libdrmtime.so',
+        'vendor/lib/libdsi_netctrl.so',
+        'vendor/lib/libdsutils.so',
+        'vendor/lib/libfastcvopt.so',
+        'vendor/lib/liblistensoundmodel2.so',
+        'vendor/lib/liblqe.so',
+        'vendor/lib/libmdsprpc.so',
+        'vendor/lib/libmmcamera2_frame_algorithm.so',
+        'vendor/lib/libmmcamera2_is.so',
+        'vendor/lib/libmmcamera2_stats_algorithm.so',
+        'vendor/lib/libmmcamera_pdaf.so',
+        'vendor/lib/libmmcamera_pdafcamif.so',
+        'vendor/lib/libmmcamera_tintless_algo.so',
+        'vendor/lib/libmmcamera_tintless_bg_pca_algo.so',
+        'vendor/lib/libnetmgr.so',
+        'vendor/lib/libqdi.so',
+        'vendor/lib/libqdp.so',
+        'vendor/lib/librpmb.so',
+        'vendor/lib/libssd.so',
+        'vendor/lib/libtzdrmgenprov.so',
+        'vendor/lib/libvcel.so',
+        'vendor/lib/libvss_nv_core.so',
+        'vendor/lib/libvss_nv_idl.so',
+        'vendor/lib/libvss_nv_iface.so',
+    ): blob_fixup()
+        # The vendor libc stub has no LIBC_PRIVATE; bind to the default versions.
+        .patchelf_version(PATCHELF_VERSION)
+        .clear_symbol_version('__aeabi_atexit')
+        .clear_symbol_version('__aeabi_memcpy')
+        .clear_symbol_version('__aeabi_memmove')
+        .clear_symbol_version('__aeabi_memset')
+        .clear_symbol_version('__gnu_Unwind_Find_exidx'),
     'vendor/lib64/libimsmedia_jni.so': blob_fixup()
         # Give the legacy Surface 16 KiB and pull in its compatibility shim.
         .patchelf_version(PATCHELF_VERSION)
