@@ -187,17 +187,6 @@ NANOHUB_SENSORHAL_SENSORLIST := $(DEVICE_PATH)/sensorhal/sensorlist.cpp
 NANOHUB_SENSORHAL_DIRECT_REPORT_ENABLED := true
 TARGET_USES_CHINOOK_SENSORHUB := false
 
-# Shims
-TARGET_LD_SHIM_LIBS := \
-    /system/vendor/lib64/libril-qc-qmi-1.so|libaudioclient_shim.so \
-    /vendor/bin/ATFWD-daemon|libshim_dpmframework.so \
-    /vendor/lib64/libcne.so|libshim_dpmframework.so \
-    /vendor/lib/liboemcamera.so|libshim_sensor.so \
-    /vendor/bin/slim_daemon|libshim_sensor.so \
-    /vendor/lib/mediadrm/libwvdrmengine.so|libprotobuf_shim.so \
-    /vendor/bin/hw/android.hardware.drm@1.0-service.widevine|libshim_drm.so \
-    /vendor/bin/mm-qcamera-daemon|libc_mutexdestroy_shim.so
-
 # Testing related defines
 
 # Telephony

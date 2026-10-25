@@ -73,11 +73,11 @@ lib64/libloc_ds_api.so:system/lib64/libloc_ds_api.so|89347db7f9bb3f6c47c3922407d
 -vendor/app/ims/ims.apk|7147a6528dfa5cad8b38484fb0bbf78363e10ece|5cc41e34af252c8af575dbe298defc3e025cb97a
 
 # vendor/bin
-bin/ATFWD-daemon:vendor/bin/ATFWD-daemon|cc895189ef6400c81924bcc27a8b727ae1921926
+bin/ATFWD-daemon:vendor/bin/ATFWD-daemon|cc895189ef6400c81924bcc27a8b727ae1921926|da7d22d2d15cdaf4409a22ef8220dbc2ee3be1ea
 bin/btnvtool:vendor/bin/btnvtool|931671bb9b16f398385a99df6a6c1fb6ef7e04c5
 bin/cnd:vendor/bin/cnd|118361be8ab60790f835b57ffe734125734969b5
 bin/cnss-daemon:vendor/bin/cnss-daemon|9f89a0dc4c99871d42f899f51075829d7d5cfc6a
-vendor/bin/hw/android.hardware.drm@1.0-service.widevine|65da8d878c199742965e40e0ab7ac5e3c3e84098
+vendor/bin/hw/android.hardware.drm@1.0-service.widevine|65da8d878c199742965e40e0ab7ac5e3c3e84098|9e6b8b691fab4bd1445e6a99afce9c903bdca3eb
 bin/ims_rtp_daemon:vendor/bin/ims_rtp_daemon|90988ed8de1cf22ca66deb96084600c8b72636fe
 bin/imsdatadaemon:vendor/bin/imsdatadaemon|ee19461cf34425a0fa2b853594178250d9301760
 bin/imsqmidaemon:vendor/bin/imsqmidaemon|a7b63882e71105cf5763c741d83908cedf9e3a06
@@ -85,7 +85,7 @@ bin/irsc_util:vendor/bin/irsc_util|68ce723a76ec190de225dc16784db71a79268934
 bin/loc_launcher:vendor/bin/loc_launcher|fc5afe88ffb6a59fb32371fd6555f901ab1350e4
 bin/location-mq:vendor/bin/location-mq|91604af318c77f8b367c0ce9a5937612f6448f80
 bin/lowi-server:vendor/bin/lowi-server|21108f9b5371a2bb9091d52292f66322e888082a
-vendor/bin/mm-qcamera-daemon|29f49dc991a258b7d4f2e9810c85ca8eb1380554
+vendor/bin/mm-qcamera-daemon|29f49dc991a258b7d4f2e9810c85ca8eb1380554|fac100e68cd151d4fa3eb2c40724323f2ec790b1
 bin/msm_irqbalance:vendor/bin/msm_irqbalance|84a1084bcbadb29d9c11647f4bec30d9a84d42e9
 bin/netmgrd:vendor/bin/netmgrd|1e1e2638e67291d3b63c1b2693eeff5e5e7d0b6b
 bin/nl_listener:vendor/bin/nl_listener|630588635ecbd61d8bffef663d83c5eed2d801b8
@@ -98,7 +98,7 @@ bin/qmuxd:vendor/bin/qmuxd|0ccd2eda6e6b95c53010e2d947a0747fe9fb35da
 vendor/bin/qseecomd|58a25b6721b64a810d59ac027d3e25e382bde447
 vendor/bin/qti|089382635052af6c14729dd2c598515079eded23
 bin/rmt_storage:vendor/bin/rmt_storage|8b3d8d1d46e1e3f0d2e4f1e0344b347b8a128cf0
-vendor/bin/slim_daemon|395c18077437e8b352a6d460e72da6a54f8f5c2f|55e50a921e857153da79450eba123e4d874143d3
+vendor/bin/slim_daemon|395c18077437e8b352a6d460e72da6a54f8f5c2f|88d5d9a683ac6d202e347c89a896285dac075cad
 bin/subsystem_ramdump:vendor/bin/subsystem_ramdump|4880ba8cd77bdc1f4f0132f0ba5bd5553de0a771
 bin/thermal-engine:vendor/bin/thermal-engine|526ab26016a487c799ec9c3223610fe5da1bd66d
 vendor/bin/wcnss_filter|2034a3efa52a7ad2c39e7e7b41b022ef15e0e542
@@ -365,7 +365,7 @@ vendor/lib/libmmjpeg.so|211971745aeeef0a7f7e1a3e83ae502ab664432a
 vendor/lib/libmmqjpeg_codec.so|f58bb0b22f5718c7d8f578e90d75f72efb76ca49
 vendor/lib/libmmqjpegdma.so|06573a01b23676eaea1d725ebcc43fe30f8b5678
 vendor/lib/libnetmgr.so|d5a3888eb995ad6f9c5a81befd33ee6a78208629
-vendor/lib/liboemcamera.so|d3cf423e69819bdbf29aa625ea271a20870ce16b|161c9ec002118ebd7cfbf2f64d506694c0020ba1
+vendor/lib/liboemcamera.so|d3cf423e69819bdbf29aa625ea271a20870ce16b|a560b772893bda7fca62a568376e526b55aa27f8
 vendor/lib/liboemcrypto.so|f1844bd0710a4d3d22da7e7a78e8921cb81f3ae8
 vendor/lib/libqcci_legacy.so|e5194a701231ee4a698cd8ce62b45bfb40dcb58d
 vendor/lib/libqdi.so|fad6b2209a45318f45cab9aeee1d137ad9890c65
@@ -461,7 +461,7 @@ vendor/lib64/libbccQTI.so|e39a9a997196757a9830dd217dba086581b35a4d
 vendor/lib64/libbtnv.so|ff6ba2e140f70d42217d195c8416c48d643bf543
 vendor/lib64/libc2d30-a3xx.so|874101006b6ee601ab4245f99927ae29bcffa020
 vendor/lib64/libc2d30-a4xx.so|e40a2efbecaccd34970b981bb8d83f3fa58f3cec
-vendor/lib64/libcne.so|929029ccc90cc159653b94222f214c1b7613f3e9
+vendor/lib64/libcne.so|929029ccc90cc159653b94222f214c1b7613f3e9|6a75393ecf9588e7843a5a026cddb2993aa560e8
 vendor/lib64/libcneapiclient.so|84fc5c09fea14c2bfa485507695a0dff2f5ed4ef
 vendor/lib64/libconfigdb.so|ab7dc5c9296cecf6c88537e91a4327d6a5f4f20d
 vendor/lib64/libdiag.so|64ff5f34cc68d282ee79e806b6462437a133d91e
@@ -503,7 +503,7 @@ vendor/lib64/libqmi_encdec.so|8c17d3f1cb77081872e7a087ee36069bb5dd68e2
 vendor/lib64/libqmiservices.so|732309b65834f62654447273a814404e05357b7d
 vendor/lib64/libqti-perfd-client.so|940f3250999ff7d60abea879e6c22eefa50e24ae
 vendor/lib64/libquipc_os_api.so|68a4581b50574b8e99d0940a4689e84834e722f0
-vendor/lib64/libril-qc-qmi-1.so|508c8c2fbbc196fd6c42a8d19eae998023d5743f|4fe2ec6eca39893b15e9324c82d82ba57642d12b
+vendor/lib64/libril-qc-qmi-1.so|508c8c2fbbc196fd6c42a8d19eae998023d5743f|bbb4af6517345d26e42a5ce7dcecc2eb4984a948
 vendor/lib64/libril-qcril-hook-oem.so|d450149beccaa66fc6b38e3ac7b23ea96e817764
 vendor/lib64/librpmb.so|1ac3db51db595fb985072da0c7d6a7407eefca85
 vendor/lib64/librs_adreno.so|18e913b6d8f79e4b8563a8c8a0b2475e609d4813

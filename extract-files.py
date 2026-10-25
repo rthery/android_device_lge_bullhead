@@ -45,7 +45,8 @@ namespace_imports = [
 
 
 # Libraries the 8.1 blobs need that Soong cannot provide to them: gone
-# from Android 15, system-only, or built by Make.
+# from Android 15, system-only (including our system shims), or built by
+# Make.
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
     (
@@ -54,6 +55,7 @@ lib_fixups: lib_fixups_user_type = {
         'libart',
         'libart-compiler',
         'libaudioclient',
+        'libbullhead_audiosystem_shim',
         'libgps.utils',
         'libkeystore_binder',
         'libloc_core',
@@ -61,6 +63,8 @@ lib_fixups: lib_fixups_user_type = {
         'libnativehelper',
         'librmnetctl',
         'libsensor',
+        'libshim_drm',
+        'libshim_sensor',
         'libsoftkeymaster',
         'libstagefright',
         'libstdc++',
@@ -158,6 +162,18 @@ def check_first_needed(
 blob_fixups: blob_fixups_user_type = {
     'vendor/app/ims/ims.apk': blob_fixup()
         .call(ims_fix_arraycopy),
+    ('vendor/bin/ATFWD-daemon', 'vendor/lib64/libcne.so'): blob_fixup()
+        # strdup8to16, gone from libcutils.
+        .patchelf_version(PATCHELF_VERSION)
+        .add_needed('libshim_dpmframework.so'),
+    'vendor/bin/hw/android.hardware.drm@1.0-service.widevine': blob_fixup()
+        # LogMessage constructor without a tag.
+        .patchelf_version(PATCHELF_VERSION)
+        .add_needed('libshim_drm.so'),
+    'vendor/bin/mm-qcamera-daemon': blob_fixup()
+        # Tolerate pthread_mutex_destroy on an already destroyed mutex.
+        .patchelf_version(PATCHELF_VERSION)
+        .add_needed('libc_mutexdestroy_shim.so'),
     'vendor/bin/pm-service': blob_fixup()
         # Register on /dev/vndbinder, where its vendor clients look it up.
         .patchelf_version(PATCHELF_VERSION)
@@ -166,13 +182,19 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libutils-v33.so'),
     'vendor/bin/slim_daemon': blob_fixup()
         # Allocate the Android 13 Looper size (264) instead of 8.1's 224.
-        .call(patch_bytes, 0x12A20, 'e00b1b32bbebff97e1031f2af60300aabcebff97', '00218052', need_tmp_dir=False),
+        .call(patch_bytes, 0x12A20, 'e00b1b32bbebff97e1031f2af60300aabcebff97', '00218052', need_tmp_dir=False)
+        # Legacy SensorManager::createEventQueue(String8, int).
+        .patchelf_version(PATCHELF_VERSION)
+        .add_needed('libshim_sensor.so'),
     'vendor/lib/libmmcamera2_stats_modules.so': blob_fixup()
         # Read the autofocus sync flag before the queue may free the message.
         .call(patch_bytes, 0x1DD56, '11f093f8012809d16568', '656811f092f8012808d1', need_tmp_dir=False),
     'vendor/lib/liboemcamera.so': blob_fixup()
         # Allocate the Android 13 Looper size (248) instead of 8.1's 112.
-        .call(patch_bytes, 0x5F2A, '702014f0b0f90021054614f0b4fa', 'f820', need_tmp_dir=False),
+        .call(patch_bytes, 0x5F2A, '702014f0b0f90021054614f0b4fa', 'f820', need_tmp_dir=False)
+        # Legacy SensorManager::createEventQueue(String8, int).
+        .patchelf_version(PATCHELF_VERSION)
+        .add_needed('libshim_sensor.so'),
     'vendor/lib64/libimsmedia_jni.so': blob_fixup()
         # Give the legacy Surface 16 KiB and pull in its compatibility shim.
         .patchelf_version(PATCHELF_VERSION)
@@ -182,6 +204,8 @@ blob_fixups: blob_fixups_user_type = {
         # Resolve legacy AudioSystem parameter calls before libaudioclient.
         .patchelf_version(PATCHELF_VERSION)
         .call(check_legacy_audiosystem_imports, need_tmp_dir=False)
+        # AudioSystem::setErrorCallback, now addErrorCallback.
+        .add_needed('libbullhead_audiosystem_shim.so')
         .add_needed('libbullhead_ril_audio.so')
         .call(check_first_needed, 'libbullhead_ril_audio.so', need_tmp_dir=False),
 }  # fmt: skip

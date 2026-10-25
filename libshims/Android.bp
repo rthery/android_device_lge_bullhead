@@ -8,7 +8,7 @@ cc_library_shared {
 
 cc_library_shared {
     srcs: ["libaudioclient_shim.cpp"],
-    name: "libaudioclient_shim",
+    name: "libbullhead_audiosystem_shim",
     shared_libs: ["libaudioclient"],
 }
 

@@ -396,7 +396,7 @@ endif
 
 # Shims
 PRODUCT_PACKAGES += \
-    libaudioclient_shim \
+    libbullhead_audiosystem_shim \
     libshim_dpmframework \
     libshim_sensor \
     libprotobuf_shim \
