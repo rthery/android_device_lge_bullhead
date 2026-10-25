@@ -368,7 +368,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.radio.snapshot_enabled=1 \
     persist.radio.snapshot_timer=10
 
-# libutils from AOSP prebuilts/vndk/v33 for pm-service
+# VNDK v33 libutils for pm-service, from hardware/lineage/compat
 PRODUCT_PACKAGES += \
     libutils-v33
 
@@ -423,7 +423,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     thermal.bullhead
 
-# VNDK v29 libraries for the 8.1 blobs, from AOSP prebuilts/vndk/v29
+# VNDK v29 libraries for the 8.1 blobs, from hardware/lineage/compat
 PRODUCT_PACKAGES += \
     libcutils-v29 \
     libprotobuf-cpp-lite-v29
