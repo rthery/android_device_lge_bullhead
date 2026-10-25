@@ -373,8 +373,14 @@ PRODUCT_PACKAGES += \
     libutils-v33
 
 # Sensor & activity_recognition HAL
+$(call soong_config_set,nanohub_sensorhal,sensorlist_library,//device/lge/bullhead:libnanohub_sensorlist)
+$(call soong_config_set,nanohub_sensorhal,direct_report_enabled,true)
+$(call soong_config_set,nanohub_sensorhal,lid_state_enabled,true)
+
+PRODUCT_VENDOR_PROPERTIES += ro.hardware.sensors=nanohub
+
 PRODUCT_PACKAGES += \
-    sensors.bullhead \
+    sensors.nanohub \
     android.hardware.sensors@1.0-impl \
     android.hardware.contexthub@1.0-impl.nanohub \
     android.hardware.contexthub@1.0-service
