@@ -6,7 +6,7 @@
 #include <gui/Surface.h>
 #include <new>
 
-// blob_fixup in extract-files.sh expands the libimsmedia_jni allocation to 16 KiB.
+// blob_fixups in extract-files.py expands the libimsmedia_jni allocation to 16 KiB.
 static_assert(sizeof(android::Surface) <= 16384, "IMS Surface allocation is too small");
 extern "C" __attribute__((visibility("default"))) void legacyImsSurfaceConstructor(
         android::Surface* surface, const android::sp<android::IGraphicBufferProducer>& producer,

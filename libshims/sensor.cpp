@@ -6,7 +6,7 @@
 #include <sensor/SensorManager.h>
 #include <utils/Looper.h>
 
-// blob_fixup in extract-files.sh enlarges the legacy liboemcamera and
+// blob_fixups in extract-files.py enlarges the legacy liboemcamera and
 // slim_daemon Looper allocations to these sizes.
 #if !defined(__LP64__)
 static_assert(sizeof(android::Looper) <= 248, "Legacy camera Looper allocation too small");

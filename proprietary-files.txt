@@ -1,6 +1,6 @@
 # Bullhead blobs. Source: nexus5x-dev/vendor_lge_bullhead at
 # 3bce2e142f622a354ae248214e31b6b4424fdfef (its proprietary/ folder).
-# Files with two hashes are changed by blob_fixup in extract-files.sh.
+# Files with two hashes are changed by blob_fixups in extract-files.py.
 
 # system/app
 -app/HiddenMenu/HiddenMenu.apk:system/app/HiddenMenu/HiddenMenu.apk|2e5c38e0f412890853299b29496beebe9557eaec
