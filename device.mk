@@ -401,10 +401,6 @@ PRODUCT_PACKAGES += \
     libprotobuf_shim \
     libc_mutexdestroy_shim
 
-PRODUCT_COPY_FILES += \
-    prebuilts/vndk/v29/arm/arch-arm-armv7-a-neon/shared/vndk-core/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib/libprotobuf-cpp-lite-v29.so \
-    prebuilts/vndk/v29/arm64/arch-arm64-armv8-a/shared/vndk-core/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-lite-v29.so
-
 # Soong
 PRODUCT_SOONG_NAMESPACES += \
     device/lge/bullhead
@@ -425,13 +421,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     thermal.bullhead
 
-# VNDK
-PRODUCT_EXTRA_VNDK_VERSIONS := 29
-
+# VNDK v29 libraries for the 8.1 blobs, from AOSP prebuilts/vndk/v29
 PRODUCT_COPY_FILES += \
-    prebuilts/vndk/v29/arm/arch-arm-armv7-a-neon/shared/vndk-core/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib/libprotobuf-cpp-lite-v29.so \
-    prebuilts/vndk/v29/arm64/arch-arm64-armv8-a/shared/vndk-core/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-lite-v29.so \
-    prebuilts/vndk/v29/arm64/arch-arm64-armv8-a/shared/vndk-sp/libcutils.so:$(TARGET_COPY_OUT_SYSTEM)/lib64/libcutils-v29.so
+    $(LOCAL_PATH)/vndk-v29/arm/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib/libprotobuf-cpp-lite-v29.so \
+    $(LOCAL_PATH)/vndk-v29/arm64/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-lite-v29.so \
+    $(LOCAL_PATH)/vndk-v29/arm64/libcutils.so:$(TARGET_COPY_OUT_SYSTEM)/lib64/libcutils-v29.so
 
 # USB HAL
 PRODUCT_PACKAGES += \
