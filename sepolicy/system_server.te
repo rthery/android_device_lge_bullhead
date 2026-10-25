@@ -3,6 +3,7 @@
 qmux_socket(system_server)
 
 allow system_server self:netlink_socket create_socket_perms_no_ioctl;
+allow system_server self:netlink_generic_socket create_socket_perms_no_ioctl;
 
 allow system_server per_mgr_service:service_manager find;
 
