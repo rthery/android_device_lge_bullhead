@@ -368,8 +368,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.radio.snapshot_enabled=1 \
     persist.radio.snapshot_timer=10
 
-PRODUCT_COPY_FILES += \
-    prebuilts/vndk/v33/arm64/arch-arm64-armv8-a/shared/vndk-sp/libutils.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libutils-v33.so
+# libutils from AOSP prebuilts/vndk/v33 for pm-service
+PRODUCT_PACKAGES += \
+    libutils-v33
 
 # Sensor & activity_recognition HAL
 PRODUCT_PACKAGES += \
@@ -423,10 +424,9 @@ PRODUCT_PACKAGES += \
     thermal.bullhead
 
 # VNDK v29 libraries for the 8.1 blobs, from AOSP prebuilts/vndk/v29
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/vndk-v29/arm/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib/libprotobuf-cpp-lite-v29.so \
-    $(LOCAL_PATH)/vndk-v29/arm64/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-lite-v29.so \
-    $(LOCAL_PATH)/vndk-v29/arm64/libcutils.so:$(TARGET_COPY_OUT_SYSTEM)/lib64/libcutils-v29.so
+PRODUCT_PACKAGES += \
+    libcutils-v29 \
+    libprotobuf-cpp-lite-v29
 
 # USB HAL
 PRODUCT_PACKAGES += \
