@@ -87,7 +87,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
     android.hardware.radio.deprecated@1.0 \
-    libaudiohal@2.0 \
     android.hardware.audio.service \
     android.hardware.audio@6.0 \
     android.hardware.audio@6.0-impl \
