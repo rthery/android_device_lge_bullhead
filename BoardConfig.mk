@@ -180,6 +180,9 @@ BOARD_SEPOLICY_DIRS += \
 # Android 14 enforces the full Treble neverallows on every device.
 SELINUX_IGNORE_NEVERALLOWS := true
 
+# The 8.1 Adreno blobs use x18 as a scratch register.
+$(call soong_config_set,sanitize,disable_scs,true)
+
 # Sensors
 TARGET_USES_CHINOOK_SENSORHUB := false
 
