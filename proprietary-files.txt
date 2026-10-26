@@ -61,9 +61,6 @@ lib64/libloc_ds_api.so:system/lib64/libloc_ds_api.so|89347db7f9bb3f6c47c3922407d
 -priv-app/DCMO/DCMO.apk:system/priv-app/DCMO/DCMO.apk|7c82e12d3a6bdd3e34eaaee753b82879e561845b
 -priv-app/DMConfigUpdate/DMConfigUpdate.apk:system/priv-app/DMConfigUpdate/DMConfigUpdate.apk|c370dfc6e5cabd944805d264b832c32e8943ab62
 -priv-app/DiagMon/DiagMon.apk:system/priv-app/DiagMon/DiagMon.apk|bc9d3aeb375d12ffb3d1ef3fb8c996ed87fb9da4
--priv-app/HotwordEnrollmentOKGoogleWCD9330/HotwordEnrollmentOKGoogleWCD9330.apk:system/priv-app/HotwordEnrollmentOKGoogleWCD9330/HotwordEnrollmentOKGoogleWCD9330.apk;PRESIGNED;SKIPAPKCHECKS|898fe1df62f185e281423caf6b8c7b5cfd86c5ec
--priv-app/HotwordEnrollmentTGoogleWCD9330/HotwordEnrollmentTGoogleWCD9330.apk:system/priv-app/HotwordEnrollmentTGoogleWCD9330/HotwordEnrollmentTGoogleWCD9330.apk;PRESIGNED;SKIPAPKCHECKS|82577bf7a6c022e7fd00db15be06546df22a3f70
--priv-app/HotwordEnrollmentXGoogleWCD9330/HotwordEnrollmentXGoogleWCD9330.apk:system/priv-app/HotwordEnrollmentXGoogleWCD9330/HotwordEnrollmentXGoogleWCD9330.apk;PRESIGNED;SKIPAPKCHECKS|be4e1ea591d7eb7a89ebed3b133139a819338be3
 -priv-app/LifeTimerService/LifeTimerService.apk:system/priv-app/LifeTimerService/LifeTimerService.apk|355d438dda182761921ee14e76dfdc9a164c26f3
 -priv-app/atfwd/atfwd.apk:system/priv-app/atfwd/atfwd.apk|5f80a88be23059ae842a472fffdad3b32babd6b2
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk:system/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk|659cef6232f4becf41de380d25f20f33183a43c6
