@@ -151,6 +151,11 @@
 /(vendor|system/vendor)/lib(64)?/libqdutils\.so             u:object_r:same_process_hal_file:s0
 /(vendor|system/vendor)/lib(64)?/libqservice\.so            u:object_r:same_process_hal_file:s0
 
+# IMS app JNI libraries, loaded into the phone process
+/(vendor|system/vendor)/lib(64)?/libbullhead_ims_surface\.so u:object_r:same_process_hal_file:s0
+/(vendor|system/vendor)/lib(64)?/libimscamera_jni\.so       u:object_r:same_process_hal_file:s0
+/(vendor|system/vendor)/lib(64)?/libimsmedia_jni\.so        u:object_r:same_process_hal_file:s0
+
 # Sysfs files used by qmuxd
 /sys/devices/virtual/smdpkt/smdcntl([0-9])+/open_timeout            u:object_r:sysfs_smdcntl_open_timeout:s0
 
