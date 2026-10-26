@@ -167,6 +167,20 @@ TARGET_USES_INTERACTION_BOOST := true
 TARGET_RECOVERY_UI_LIB := librecovery_ui_nanohub
 BOARD_SUPPRESS_SECURE_ERASE := true
 TARGET_RECOVERY_FSTAB = $(DEVICE_PATH)/rootdir/etc/fstab.bullhead
+# Keep the XZ recovery ramdisk well below the bootloader load limit:
+# drop nano, the animation frames past the first, and the f2fs and
+# erofs tools (all partitions here are ext4).
+BOARD_RECOVERY_IMAGE_PREPARE = \
+    rm -rf $(TARGET_RECOVERY_ROOT_OUT)/system/bin/nano \
+        $(TARGET_RECOVERY_ROOT_OUT)/system/lib64/libncurses_recovery.so \
+        $(TARGET_RECOVERY_ROOT_OUT)/system/etc/nano \
+        $(TARGET_RECOVERY_ROOT_OUT)/system/etc/terminfo \
+        $(TARGET_RECOVERY_ROOT_OUT)/res/images/loop0000[1-9].png \
+        $(TARGET_RECOVERY_ROOT_OUT)/res/images/loop000[1-9][0-9].png \
+        $(TARGET_RECOVERY_ROOT_OUT)/system/bin/*.erofs \
+        $(TARGET_RECOVERY_ROOT_OUT)/system/bin/make_f2fs \
+        $(TARGET_RECOVERY_ROOT_OUT)/system/bin/sload_f2fs \
+        $(TARGET_RECOVERY_ROOT_OUT)/system/bin/fsck.f2fs
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
