@@ -159,13 +159,137 @@ def check_first_needed(
         raise ValueError(f'{lib} must be the first dependency of {file.dst}')
 
 
+# The vendor libc stub has no LIBC_PRIVATE; bind to the default versions.
+LIBC_PRIVATE_BLOBS = {
+    'vendor/lib/hw/gatekeeper.msm8992.so',
+    'vendor/lib/lib-dplmedia.so',
+    'vendor/lib/lib-ims-rcscmjni.so',
+    'vendor/lib/lib-imsSDP.so',
+    'vendor/lib/lib-imsdpl.so',
+    'vendor/lib/lib-imsqimf.so',
+    'vendor/lib/lib-imsrcs.so',
+    'vendor/lib/lib-imsrcscm.so',
+    'vendor/lib/lib-imsrcscmclient.so',
+    'vendor/lib/lib-imsrcscmservice.so',
+    'vendor/lib/lib-imss.so',
+    'vendor/lib/lib-imsvt.so',
+    'vendor/lib/lib-imsxml.so',
+    'vendor/lib/lib-rcsimssjni.so',
+    'vendor/lib/lib-rcsjni.so',
+    'vendor/lib/lib-rtpcommon.so',
+    'vendor/lib/lib-rtpcore.so',
+    'vendor/lib/lib-rtpdaemoninterface.so',
+    'vendor/lib/lib-rtpsl.so',
+    'vendor/lib/libQSEEComAPI.so',
+    'vendor/lib/libadm.so',
+    'vendor/lib/libadpcmdec.so',
+    'vendor/lib/libadsprpc.so',
+    'vendor/lib/libcneapiclient.so',
+    'vendor/lib/libconfigdb.so',
+    'vendor/lib/libdrmfs.so',
+    'vendor/lib/libdrmtime.so',
+    'vendor/lib/libdsi_netctrl.so',
+    'vendor/lib/libdsutils.so',
+    'vendor/lib/libfastcvopt.so',
+    'vendor/lib/liblistensoundmodel2.so',
+    'vendor/lib/liblqe.so',
+    'vendor/lib/libmdsprpc.so',
+    'vendor/lib/libmmcamera2_frame_algorithm.so',
+    'vendor/lib/libmmcamera2_is.so',
+    'vendor/lib/libmmcamera2_stats_algorithm.so',
+    'vendor/lib/libmmcamera_pdaf.so',
+    'vendor/lib/libmmcamera_pdafcamif.so',
+    'vendor/lib/libmmcamera_tintless_algo.so',
+    'vendor/lib/libmmcamera_tintless_bg_pca_algo.so',
+    'vendor/lib/libnetmgr.so',
+    'vendor/lib/libqdi.so',
+    'vendor/lib/libqdp.so',
+    'vendor/lib/librpmb.so',
+    'vendor/lib/libssd.so',
+    'vendor/lib/libtzdrmgenprov.so',
+    'vendor/lib/libvcel.so',
+    'vendor/lib/libvss_nv_core.so',
+    'vendor/lib/libvss_nv_idl.so',
+    'vendor/lib/libvss_nv_iface.so',
+}
+
+# Call liblog without listing it in DT_NEEDED.
+LIBLOG_BLOBS = {
+    'vendor/bin/cnd',
+    'vendor/bin/imsdatadaemon',
+    'vendor/bin/imsqmidaemon',
+    'vendor/bin/loc_launcher',
+    'vendor/bin/location-mq',
+    'vendor/bin/lowi-server',
+    'vendor/bin/port-bridge',
+    'vendor/lib/lib-imsSDP.so',
+    'vendor/lib/lib-imsdpl.so',
+    'vendor/lib/lib-imss.so',
+    'vendor/lib/lib-rtpdaemoninterface.so',
+    'vendor/lib/libQSEEComAPI.so',
+    'vendor/lib/libcne.so',
+    'vendor/lib/libcneapiclient.so',
+    'vendor/lib/libmmcamera2_frame_algorithm.so',
+    'vendor/lib/libmmcamera2_is.so',
+    'vendor/lib/libmmcamera2_q3a_core.so',
+    'vendor/lib/libmmcamera2_stats_algorithm.so',
+    'vendor/lib/libmmcamera_cac2_lib.so',
+    'vendor/lib/libmmcamera_pdaf.so',
+    'vendor/lib/libmmcamera_pdafcamif.so',
+    'vendor/lib/libmmcamera_tintless_bg_pca_algo.so',
+    'vendor/lib64/lib-imsSDP.so',
+    'vendor/lib64/lib-imsdpl.so',
+    'vendor/lib64/lib-imss.so',
+    'vendor/lib64/lib-rtpdaemoninterface.so',
+    'vendor/lib64/libCommandSvc.so',
+    'vendor/lib64/libQSEEComAPI.so',
+    'vendor/lib64/libcneapiclient.so',
+    'vendor/lib64/libizat_core.so',
+    'vendor/lib64/liblbs_core.so',
+    'vendor/lib64/liblowi_client.so',
+    'vendor/lib64/liblowi_wifihal.so',
+    'vendor/lib64/libmmcamera2_q3a_core.so',
+    'vendor/lib64/libmmcamera2_stats_algorithm.so',
+    'vendor/lib64/libquipc_os_api.so',
+}
+
+# set_sched_policy moved from libcutils to libprocessgroup.
+PROCESSGROUP_BLOBS = {
+    'vendor/lib/hw/bluetooth.default.so',
+    'vendor/lib/libvoice-svc.so',
+    'vendor/lib64/hw/bluetooth.default.so',
+    'vendor/lib64/libvoice-svc.so',
+}
+
+LEGACY_LIBC_BLOBS = sorted(LIBC_PRIVATE_BLOBS | LIBLOG_BLOBS | PROCESSGROUP_BLOBS)
+
+
+def legacy_libc_fixup(path: str) -> blob_fixup:
+    fixup = blob_fixup().patchelf_version(PATCHELF_VERSION)
+    if path in LIBC_PRIVATE_BLOBS:
+        for symbol in (
+            '__aeabi_atexit',
+            '__aeabi_memcpy',
+            '__aeabi_memmove',
+            '__aeabi_memset',
+            '__gnu_Unwind_Find_exidx',
+        ):
+            fixup = fixup.clear_symbol_version(symbol)
+    if path in LIBLOG_BLOBS:
+        fixup = fixup.add_needed('liblog.so')
+    if path in PROCESSGROUP_BLOBS:
+        fixup = fixup.add_needed('libprocessgroup.so')
+    return fixup
+
+
 blob_fixups: blob_fixups_user_type = {
     'vendor/app/ims/ims.apk': blob_fixup()
         .call(ims_fix_arraycopy),
     ('vendor/bin/ATFWD-daemon', 'vendor/lib64/libcne.so'): blob_fixup()
         # strdup8to16, gone from libcutils.
         .patchelf_version(PATCHELF_VERSION)
-        .add_needed('libshim_dpmframework.so'),
+        .add_needed('libshim_dpmframework.so')
+        .add_needed('liblog.so'),
     'vendor/bin/hw/android.hardware.drm@1.0-service.widevine': blob_fixup()
         # LogMessage constructor without a tag.
         .patchelf_version(PATCHELF_VERSION)
@@ -195,65 +319,7 @@ blob_fixups: blob_fixups_user_type = {
         # Legacy SensorManager::createEventQueue(String8, int).
         .patchelf_version(PATCHELF_VERSION)
         .add_needed('libshim_sensor.so'),
-    (
-        'vendor/lib/hw/gatekeeper.msm8992.so',
-        'vendor/lib/lib-dplmedia.so',
-        'vendor/lib/lib-ims-rcscmjni.so',
-        'vendor/lib/lib-imsSDP.so',
-        'vendor/lib/lib-imsdpl.so',
-        'vendor/lib/lib-imsqimf.so',
-        'vendor/lib/lib-imsrcs.so',
-        'vendor/lib/lib-imsrcscm.so',
-        'vendor/lib/lib-imsrcscmclient.so',
-        'vendor/lib/lib-imsrcscmservice.so',
-        'vendor/lib/lib-imss.so',
-        'vendor/lib/lib-imsvt.so',
-        'vendor/lib/lib-imsxml.so',
-        'vendor/lib/lib-rcsimssjni.so',
-        'vendor/lib/lib-rcsjni.so',
-        'vendor/lib/lib-rtpcommon.so',
-        'vendor/lib/lib-rtpcore.so',
-        'vendor/lib/lib-rtpdaemoninterface.so',
-        'vendor/lib/lib-rtpsl.so',
-        'vendor/lib/libQSEEComAPI.so',
-        'vendor/lib/libadm.so',
-        'vendor/lib/libadpcmdec.so',
-        'vendor/lib/libadsprpc.so',
-        'vendor/lib/libcneapiclient.so',
-        'vendor/lib/libconfigdb.so',
-        'vendor/lib/libdrmfs.so',
-        'vendor/lib/libdrmtime.so',
-        'vendor/lib/libdsi_netctrl.so',
-        'vendor/lib/libdsutils.so',
-        'vendor/lib/libfastcvopt.so',
-        'vendor/lib/liblistensoundmodel2.so',
-        'vendor/lib/liblqe.so',
-        'vendor/lib/libmdsprpc.so',
-        'vendor/lib/libmmcamera2_frame_algorithm.so',
-        'vendor/lib/libmmcamera2_is.so',
-        'vendor/lib/libmmcamera2_stats_algorithm.so',
-        'vendor/lib/libmmcamera_pdaf.so',
-        'vendor/lib/libmmcamera_pdafcamif.so',
-        'vendor/lib/libmmcamera_tintless_algo.so',
-        'vendor/lib/libmmcamera_tintless_bg_pca_algo.so',
-        'vendor/lib/libnetmgr.so',
-        'vendor/lib/libqdi.so',
-        'vendor/lib/libqdp.so',
-        'vendor/lib/librpmb.so',
-        'vendor/lib/libssd.so',
-        'vendor/lib/libtzdrmgenprov.so',
-        'vendor/lib/libvcel.so',
-        'vendor/lib/libvss_nv_core.so',
-        'vendor/lib/libvss_nv_idl.so',
-        'vendor/lib/libvss_nv_iface.so',
-    ): blob_fixup()
-        # The vendor libc stub has no LIBC_PRIVATE; bind to the default versions.
-        .patchelf_version(PATCHELF_VERSION)
-        .clear_symbol_version('__aeabi_atexit')
-        .clear_symbol_version('__aeabi_memcpy')
-        .clear_symbol_version('__aeabi_memmove')
-        .clear_symbol_version('__aeabi_memset')
-        .clear_symbol_version('__gnu_Unwind_Find_exidx'),
+    **{path: legacy_libc_fixup(path) for path in LEGACY_LIBC_BLOBS},
     'vendor/lib64/libimsmedia_jni.so': blob_fixup()
         # Give the legacy Surface 16 KiB and pull in its compatibility shim.
         .patchelf_version(PATCHELF_VERSION)
