@@ -261,7 +261,14 @@ PROCESSGROUP_BLOBS = {
     'vendor/lib64/libvoice-svc.so',
 }
 
-LEGACY_LIBC_BLOBS = sorted(LIBC_PRIVATE_BLOBS | LIBLOG_BLOBS | PROCESSGROUP_BLOBS)
+# strdup8to16, gone from libcutils.
+DPMFRAMEWORK_SHIM_BLOBS = {
+    'vendor/lib/libcne.so',
+}
+
+LEGACY_LIBC_BLOBS = sorted(
+    LIBC_PRIVATE_BLOBS | LIBLOG_BLOBS | PROCESSGROUP_BLOBS | DPMFRAMEWORK_SHIM_BLOBS
+)
 
 
 def legacy_libc_fixup(path: str) -> blob_fixup:
@@ -279,6 +286,8 @@ def legacy_libc_fixup(path: str) -> blob_fixup:
         fixup = fixup.add_needed('liblog.so')
     if path in PROCESSGROUP_BLOBS:
         fixup = fixup.add_needed('libprocessgroup.so')
+    if path in DPMFRAMEWORK_SHIM_BLOBS:
+        fixup = fixup.add_needed('libshim_dpmframework.so')
     return fixup
 
 
