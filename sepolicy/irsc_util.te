@@ -13,3 +13,6 @@ create_pty(irsc_util)
 allow irsc_util irsc_util_exec:file execute_no_trans;
 
 allow irsc_util vendor_file:dir r_dir_perms;
+
+# IPC router security rules in /system/etc/sec_config.
+allow irsc_util system_file:file r_file_perms;
