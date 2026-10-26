@@ -384,6 +384,7 @@ PRODUCT_VENDOR_PROPERTIES += ro.hardware.sensors=nanohub
 PRODUCT_PACKAGES += \
     sensors.nanohub \
     android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-service \
     android.hardware.contexthub@1.0-impl.nanohub \
     android.hardware.contexthub@1.0-service
 
