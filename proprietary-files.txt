@@ -8,20 +8,20 @@
 -app/RcsImsBootstraputil/RcsImsBootstraputil.apk:system/app/RcsImsBootstraputil/RcsImsBootstraputil.apk|54bb71761da30a395f7e9bffb9b7daded3fe08f0
 
 # system/etc
-etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb:system/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb|6fdd1e1269196249912c73af9d61795eb16d6b4c
-etc/acdbdata/MTP/MTP_General_cal.acdb:system/etc/acdbdata/MTP/MTP_General_cal.acdb|5d7f4b0fd1d0903676b641e81d6164e4fe645b0a
-etc/acdbdata/MTP/MTP_Global_cal.acdb:system/etc/acdbdata/MTP/MTP_Global_cal.acdb|8c053d8d32ab8cf31c5c88393ddf6f6502b4b89c
-etc/acdbdata/MTP/MTP_Handset_cal.acdb:system/etc/acdbdata/MTP/MTP_Handset_cal.acdb|23802c4ae6179bd973c937fc9756b5185f062e9b
-etc/acdbdata/MTP/MTP_Hdmi_cal.acdb:system/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb|7dc0c1200334f91e6e97e76ba8ed4dcd768b7969
-etc/acdbdata/MTP/MTP_Headset_cal.acdb:system/etc/acdbdata/MTP/MTP_Headset_cal.acdb|5fcb3588c2e11ef17e0f4850d95d6cbb55c931f9
-etc/acdbdata/MTP/MTP_Speaker_cal.acdb:system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb|67a14164f7a3807d42368230787573fa492d656a
+etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb;SYMLINK=system/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb|6fdd1e1269196249912c73af9d61795eb16d6b4c
+etc/acdbdata/MTP/MTP_General_cal.acdb:vendor/etc/acdbdata/MTP/MTP_General_cal.acdb;SYMLINK=system/etc/acdbdata/MTP/MTP_General_cal.acdb|5d7f4b0fd1d0903676b641e81d6164e4fe645b0a
+etc/acdbdata/MTP/MTP_Global_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Global_cal.acdb;SYMLINK=system/etc/acdbdata/MTP/MTP_Global_cal.acdb|8c053d8d32ab8cf31c5c88393ddf6f6502b4b89c
+etc/acdbdata/MTP/MTP_Handset_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Handset_cal.acdb;SYMLINK=system/etc/acdbdata/MTP/MTP_Handset_cal.acdb|23802c4ae6179bd973c937fc9756b5185f062e9b
+etc/acdbdata/MTP/MTP_Hdmi_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb;SYMLINK=system/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb|7dc0c1200334f91e6e97e76ba8ed4dcd768b7969
+etc/acdbdata/MTP/MTP_Headset_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Headset_cal.acdb;SYMLINK=system/etc/acdbdata/MTP/MTP_Headset_cal.acdb|5fcb3588c2e11ef17e0f4850d95d6cbb55c931f9
+etc/acdbdata/MTP/MTP_Speaker_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Speaker_cal.acdb;SYMLINK=system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb|67a14164f7a3807d42368230787573fa492d656a
 etc/cne/profile.txt:system/etc/cne/profile.txt|f31584303e5d5bd3fce730bfa62b82f803bc5a82
 etc/data/dsi_config.xml:system/etc/data/dsi_config.xml|b3d02d345bea34b5b96c57087060890b24ab0404
 etc/data/netmgr_config.xml:system/etc/data/netmgr_config.xml|2c1884c0c50109694d0f2d8052e88b2c20f34aaf
 etc/data/qmi_config.xml:system/etc/data/qmi_config.xml|9347bb7aaeebd86f37a32810836473de10b2af6a
-etc/flp.conf:system/etc/flp.conf|27e53d5ed2f91381e39509d1462d1b1f88bf4d20
-etc/izat.conf:system/etc/izat.conf|05fec6ee155572bfec0bf8948c937553d1e67ea7
-etc/lowi.conf:system/etc/lowi.conf|a7cb8d8b88669d7139a9a953f9319d351aa831cc
+etc/flp.conf:vendor/etc/flp.conf;SYMLINK=system/etc/flp.conf|27e53d5ed2f91381e39509d1462d1b1f88bf4d20
+etc/izat.conf:vendor/etc/izat.conf;SYMLINK=system/etc/izat.conf|05fec6ee155572bfec0bf8948c937553d1e67ea7
+etc/lowi.conf:vendor/etc/lowi.conf;SYMLINK=system/etc/lowi.conf|a7cb8d8b88669d7139a9a953f9319d351aa831cc
 etc/permissions/cneapiclient.xml:system/etc/permissions/cneapiclient.xml|15831adf0e80243042b90c734eea0a68eb8ae9c9
 etc/permissions/com.android.omadm.service.xml:system/etc/permissions/com.android.omadm.service.xml|1c6be50364d9854e2596b50204fdd7e35f1b40c1
 etc/permissions/com.android.sdm.plugins.connmo.xml:system/etc/permissions/com.android.sdm.plugins.connmo.xml|5f22e42acc7bf667d63b5a6399bd77d215b4b204
@@ -32,10 +32,10 @@ etc/permissions/qcrilhook.xml:system/etc/permissions/qcrilhook.xml|9fc58a3d54d20
 etc/permissions/qti_permissions.xml:system/etc/permissions/qti_permissions.xml|e451e905f0c7336d95709f05611bd1b6455b5764
 etc/permissions/rcsservice.xml:system/etc/permissions/rcsservice.xml|080ff042e5452b904fcd2225a5b48f8950f2d172
 etc/qcril.db:system/etc/qcril.db|cd2a9a004d2416963dc6cb8ca0281ab746c6c72e
-etc/sap.conf:system/etc/sap.conf|83bcc903e92b2e3240074265c992ea04b603cd5e
+etc/sap.conf:vendor/etc/sap.conf;SYMLINK=system/etc/sap.conf|83bcc903e92b2e3240074265c992ea04b603cd5e
 etc/sysconfig/bullhead_common.xml:system/etc/sysconfig/bullhead_common.xml|f9ce3841c7b46ad007e4b32e4c1e20e696af4a74
 etc/sysconfig/whitelist_com.android.omadm.service.xml:system/etc/sysconfig/whitelist_com.android.omadm.service.xml|0811d2ec4582d99cf45dd2e1ca533c31f0b2b4cb
-etc/thermal-engine-8992.conf:system/etc/thermal-engine-8992.conf|31ccc29adf9f580f7ac901c7b2d3c09391d06cab
+etc/thermal-engine-8992.conf:vendor/etc/thermal-engine-8992.conf;SYMLINK=system/etc/thermal-engine-8992.conf|31ccc29adf9f580f7ac901c7b2d3c09391d06cab
 
 # system/framework
 -framework/cneapiclient.jar:system/framework/cneapiclient.jar|0855c005d64e54b8fb33dbcb7a7900cd84df46c8

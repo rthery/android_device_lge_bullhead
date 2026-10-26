@@ -1,2 +1,20 @@
 soong_namespace {
 }
+
+install_symlink {
+    name: "gps.conf_symlink",
+    installed_location: "etc/gps.conf",
+    symlink_target: "/vendor/etc/gps.conf",
+}
+
+install_symlink {
+    name: "sound_trigger_mixer_paths.xml_symlink",
+    installed_location: "etc/sound_trigger_mixer_paths.xml",
+    symlink_target: "/vendor/etc/sound_trigger_mixer_paths.xml",
+}
+
+install_symlink {
+    name: "sound_trigger_platform_info.xml_symlink",
+    installed_location: "etc/sound_trigger_platform_info.xml",
+    symlink_target: "/vendor/etc/sound_trigger_platform_info.xml",
+}
