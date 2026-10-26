@@ -431,6 +431,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # TimeKeep
 PRODUCT_PACKAGES += \
+    TimeKeep \
     timekeep
 
 # Tethering

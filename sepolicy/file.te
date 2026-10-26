@@ -127,3 +127,6 @@ type wifihal_socket, file_type;
 type sysfs_rfkill0, fs_type, sysfs_type;
 type sysfs_poweroff, sysfs_type, fs_type;
 type sysfs_android_touch, fs_type, sysfs_type;
+
+# TimeKeep
+type vendor_time_data_file, file_type, data_file_type;

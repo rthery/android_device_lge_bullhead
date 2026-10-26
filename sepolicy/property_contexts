@@ -5,7 +5,6 @@ radio.atfwd.         u:object_r:radio_atfwd_prop:s0
 sys.ims.             u:object_r:qcom_ims_prop:s0
 sensors.contexthub.  u:object_r:contexthub_prop:s0
 net.r_rmnet          u:object_r:netmgrd_rmnet_prop:s0
-persist.vendor.timeadjust          u:object_r:vendor_timekeep_prop:s0
 persist.service.bdroid.ssrlvl      u:object_r:bluetooth_filter_prop:s0
 persist.service.bdroid.snooplog    u:object_r:bluetooth_filter_prop:s0
 qcom.bluetooth.soc                 u:object_r:bluetooth_filter_prop:s0

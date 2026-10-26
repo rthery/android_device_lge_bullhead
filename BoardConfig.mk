@@ -177,6 +177,7 @@ VENDOR_SECURITY_PATCH := 2018-12-05
 # SELinux
 BOARD_SEPOLICY_DIRS += \
     $(DEVICE_PATH)/sepolicy
+include hardware/sony/timekeep/sepolicy/SEPolicy.mk
 # Android 14 enforces the full Treble neverallows on every device.
 SELINUX_IGNORE_NEVERALLOWS := true
 
