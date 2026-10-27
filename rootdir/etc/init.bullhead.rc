@@ -109,8 +109,8 @@ on early-boot
     verity_update_state
 
 on boot
-    chown system system /sys/android_touch/doubletap2wake
-    chmod 0660 /sys/android_touch/doubletap2wake
+    chown system system /sys/devices/soc.0/f9924000.i2c/i2c-2/2-0020/wake_gesture
+    chmod 0660 /sys/devices/soc.0/f9924000.i2c/i2c-2/2-0020/wake_gesture
     # execute script to set initial CPU settings
     # don't run as a service to avoid race conditions
     exec - root root system -- /vendor/bin/init.bullhead.power.sh
