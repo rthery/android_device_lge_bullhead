@@ -328,10 +328,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
     $(LOCAL_PATH)/nfc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
 
-# The Adreno blobs clobber x18; keep them out of zygote so SCS code in the NFC app works
-PRODUCT_SYSTEM_PROPERTIES += \
-    ro.zygote.disable_gl_preload=true
-
 # Overlay
 DEVICE_PACKAGE_OVERLAYS := \
     $(LOCAL_PATH)/overlay
