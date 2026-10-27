@@ -53,22 +53,31 @@ public class LegacyMmTelFeature extends MMTelFeature {
 
     // ims.apk publishes the service from its boot receiver, possibly after we are bound.
     private void connect() {
+        IBinder binder = ServiceManager.checkService(LEGACY_SERVICE);
+        if (binder != null) {
+            attach(binder);
+            return;
+        }
         new Thread(() -> {
-            IBinder binder = ServiceManager.waitForService(LEGACY_SERVICE);
-            if (binder == null) {
+            IBinder waited = ServiceManager.waitForService(LEGACY_SERVICE);
+            if (waited == null) {
                 Log.e(TAG, "Legacy ims service not found");
                 return;
             }
-            try {
-                binder.linkToDeath(mDeath, 0);
-            } catch (RemoteException e) {
-                mDeath.binderDied();
-                return;
-            }
-            mLegacy = IImsService.Stub.asInterface(binder);
-            Log.i(TAG, "Connected to the legacy ims service for slot " + mSlotId);
-            setFeatureState(STATE_READY);
+            attach(waited);
         }, TAG).start();
+    }
+
+    private void attach(IBinder binder) {
+        try {
+            binder.linkToDeath(mDeath, 0);
+        } catch (RemoteException e) {
+            mDeath.binderDied();
+            return;
+        }
+        mLegacy = IImsService.Stub.asInterface(binder);
+        Log.i(TAG, "Connected to the legacy ims service for slot " + mSlotId);
+        setFeatureState(STATE_READY);
     }
 
     private IImsService legacy() throws RemoteException {
