@@ -28,6 +28,9 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
+# Recovery update from /vendor/etc/recovery.img
+$(call inherit-product, $(SRC_TARGET_DIR)/product/non_ab_device.mk)
+
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
