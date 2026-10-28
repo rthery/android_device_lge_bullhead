@@ -42,6 +42,11 @@ on post-fs-data
     write /sys/module/rndis_ipa/parameters/min_cpu_freq 1036800
     write /sys/class/android_usb/android0/f_rndis_qc/rndis_transports BAM2BAM_IPA
 
+# init.usb.rc only resets bDeviceClass, so rndis/ncm leave 0/2/1 behind for adb
+on property:sys.usb.config=none
+    write /sys/class/android_usb/android0/bDeviceSubClass 0
+    write /sys/class/android_usb/android0/bDeviceProtocol 0
+
 # MTP
 on property:sys.usb.config=mtp
     stop adbd
