@@ -6,8 +6,16 @@ get_prop({ hal_graphics_composer_default hal_graphics_allocator_default }, bullh
 get_prop(mediacodec, bullhead_video_prop)
 get_prop(hal_audio_default, bullhead_audio_prop)
 get_prop(perfd, bullhead_perf_prop)
+get_prop({ netmgrd rild ims qmux qti atfwd hal_gnss_default location thermal-engine wcnss_service }, bullhead_data_prop)
+get_prop(hal_fingerprint_default, bullhead_fingerprint_prop)
+get_prop(hal_audio_default, audio_prop)
+get_prop(qmux, radio_prop)
 set_prop(hal_wifi_default, bullhead_wlan_prop)
 get_prop(hal_graphics_composer_default, bootanim_system_prop)
 
 # The HWC reads unset persist.sys.* display overrides.
 dontaudit hal_graphics_composer_default system_prop:file r_file_perms;
+
+# libgsl probes the unset ro.graphics.memory and the camera daemon the
+# unset ro.text_gamma*. Apps read these too, so they keep default_prop.
+dontaudit { camera mediacodec hal_graphics_composer_default hal_graphics_allocator_default } default_prop:file r_file_perms;

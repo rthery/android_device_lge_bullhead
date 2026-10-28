@@ -37,6 +37,8 @@ allow camera input_device:chr_file r_file_perms;
 
 # Find sensorservice
 allow camera sensorservice_service:service_manager find;
+# SensorManager also probes the virtual device service; sensors work without it.
+dontaudit camera virtual_device_native_service:service_manager find;
 
 # Read persist_camera_file
 allow camera persist_file:dir search;
