@@ -485,4 +485,10 @@ PRODUCT_VENDOR_PROPERTIES += ro.vendor.power.legacy_wakelocks=true
 PRODUCT_PACKAGES += libbullhead_ims_surface
 PRODUCT_PACKAGES += libbullhead_ril_audio
 PRODUCT_PACKAGES += libbullhead_cne_parcel
+
+# Opt-in VoLTE through the IMS compat bridge, off until both overlays are enabled.
+PRODUCT_PACKAGES += \
+    BullheadImsFrameworkOverlay \
+    BullheadImsPhoneOverlay \
+    ImsCompatBridge
 PRODUCT_PACKAGES += bullhead_gps_debug.conf

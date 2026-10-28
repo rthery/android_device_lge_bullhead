@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 Romain Théry
+     SPDX-License-Identifier: Apache-2.0
+-->
+<!-- Opt-in VoLTE: shows the VoLTE setting. Off by default; enable with BullheadImsPhoneOverlay. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.lineageos.bullhead.ims.android">
+    <application android:hasCode="false" />
+    <overlay
+        android:targetPackage="android"
+        android:isStatic="false"
+        android:priority="0" />
+</manifest>
