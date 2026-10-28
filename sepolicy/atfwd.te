@@ -18,6 +18,8 @@ allow atfwd atfwd_service:service_manager find;
 allow atfwd diag_device:chr_file rw_file_perms;
 
 set_prop(atfwd, radio_atfwd_prop)
+# Waits for sys.boot_completed before registering.
+get_prop(atfwd, boot_status_prop)
 
 allow atfwd sysfs_msm_subsys:dir r_dir_perms;
 allow atfwd sysfs_msm_subsys:lnk_file r_file_perms;
