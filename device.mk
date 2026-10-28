@@ -484,4 +484,5 @@ PRODUCT_VENDOR_PROPERTIES += ro.vendor.power.legacy_wakelocks=true
 
 PRODUCT_PACKAGES += libbullhead_ims_surface
 PRODUCT_PACKAGES += libbullhead_ril_audio
+PRODUCT_PACKAGES += libbullhead_cne_parcel
 PRODUCT_PACKAGES += bullhead_gps_debug.conf

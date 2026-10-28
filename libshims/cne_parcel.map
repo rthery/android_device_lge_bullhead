@@ -1,0 +1,7 @@
+LIBBULLHEAD_CNE_PARCEL {
+  global:
+    _ZN7android6Parcel*;
+    _ZNK7android6Parcel*;
+  local:
+    *;
+};

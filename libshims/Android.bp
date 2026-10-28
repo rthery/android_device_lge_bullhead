@@ -53,3 +53,12 @@ cc_library_shared {
     vendor: true,
     compile_multilib: "64",
 }
+
+cc_library_shared {
+    name: "libbullhead_cne_parcel",
+    srcs: ["cne_parcel.cpp"],
+    shared_libs: ["libutils"],
+    // Its own version, so libbinder's versioned self-references never bind here.
+    version_script: "cne_parcel.map",
+    vendor: true,
+}

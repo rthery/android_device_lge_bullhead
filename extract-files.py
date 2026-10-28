@@ -266,8 +266,27 @@ DPMFRAMEWORK_SHIM_BLOBS = {
     'vendor/lib/libcne.so',
 }
 
+# Their stack Parcel slot is sized for 8.1; the Android 15 Parcel overruns it.
+# cnd itself uses no libbinder symbol, but its libbinder would otherwise come first.
+CNE_PARCEL_BLOBS = {
+    'vendor/bin/cnd',
+    'vendor/lib/libcne.so',
+    'vendor/lib/libcneapiclient.so',
+    'vendor/lib64/libcneapiclient.so',
+}
+
+# Loads libcneapiclient after libraries that pull in libbinder.
+CNE_PARCEL_FIRST_BLOBS = {
+    'vendor/bin/imsdatadaemon',
+}
+
 LEGACY_LIBC_BLOBS = sorted(
-    LIBC_PRIVATE_BLOBS | LIBLOG_BLOBS | PROCESSGROUP_BLOBS | DPMFRAMEWORK_SHIM_BLOBS
+    LIBC_PRIVATE_BLOBS
+    | LIBLOG_BLOBS
+    | PROCESSGROUP_BLOBS
+    | DPMFRAMEWORK_SHIM_BLOBS
+    | CNE_PARCEL_BLOBS
+    | CNE_PARCEL_FIRST_BLOBS
 )
 
 
@@ -288,17 +307,30 @@ def legacy_libc_fixup(path: str) -> blob_fixup:
         fixup = fixup.add_needed('libprocessgroup.so')
     if path in DPMFRAMEWORK_SHIM_BLOBS:
         fixup = fixup.add_needed('libshim_dpmframework.so')
+    if path in CNE_PARCEL_BLOBS:
+        fixup = fixup.replace_needed('libbinder.so', 'libbullhead_cne_parcel.so')
+    if path in CNE_PARCEL_FIRST_BLOBS:
+        fixup = fixup.add_needed('libbullhead_cne_parcel.so').call(
+            check_first_needed, 'libbullhead_cne_parcel.so', need_tmp_dir=False
+        )
     return fixup
 
 
 blob_fixups: blob_fixups_user_type = {
     'vendor/app/ims/ims.apk': blob_fixup()
         .call(ims_fix_arraycopy),
-    ('vendor/bin/ATFWD-daemon', 'vendor/lib64/libcne.so'): blob_fixup()
+    'vendor/bin/ATFWD-daemon': blob_fixup()
         # strdup8to16, gone from libcutils.
         .patchelf_version(PATCHELF_VERSION)
         .add_needed('libshim_dpmframework.so')
         .add_needed('liblog.so'),
+    'vendor/lib64/libcne.so': blob_fixup()
+        # strdup8to16, gone from libcutils.
+        .patchelf_version(PATCHELF_VERSION)
+        .add_needed('libshim_dpmframework.so')
+        .add_needed('liblog.so')
+        # Its stack Parcel slot is sized for 8.1; the Android 15 Parcel overruns it.
+        .replace_needed('libbinder.so', 'libbullhead_cne_parcel.so'),
     'vendor/bin/hw/android.hardware.drm@1.0-service.widevine': blob_fixup()
         # LogMessage constructor without a tag.
         .patchelf_version(PATCHELF_VERSION)
