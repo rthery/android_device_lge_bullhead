@@ -189,6 +189,11 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
         <boolean name="carrier_wfc_ims_available_bool" value="true" />
     </carrier_config>
 
+    <carrier_config mcc="208" mnc="10">
+        <boolean name="carrier_volte_available_bool" value="true" />
+        <boolean name="carrier_wfc_ims_available_bool" value="true" />
+    </carrier_config>
+
     <carrier_config cid="27" name="SFR">
         <!-- Without this, the first unfiltered MVNO APN (a WAP proxy) becomes preferred -->
         <string name="default_preferred_apn_name_string" value="sl2sfr" />
