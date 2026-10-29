@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 Romain Théry
+     SPDX-License-Identifier: Apache-2.0
+-->
+<!-- Opt-in Wi-Fi calling on top of opt-in VoLTE. Off by default. The modem only offers SHA-1 based IKE proposals. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.lineageos.bullhead.ims.wfc">
+    <application android:hasCode="false" />
+    <overlay
+        android:targetPackage="android"
+        android:isStatic="false"
+        android:priority="0" />
+</manifest>

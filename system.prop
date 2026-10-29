@@ -113,6 +113,9 @@ persist.media.treble_omx=false
 ro.min_freq_0=384000
 ro.min_freq_4=384000
 
+# IWLAN
+persist.data.iwlan.enable=true
+
 # RIL
 ro.vendor.extension_library=libqti-perfd-client.so
 vendor.rild.libpath=/vendor/lib64/libril-qc-qmi-1.so

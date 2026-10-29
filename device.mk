@@ -493,8 +493,10 @@ PRODUCT_PACKAGES += libbullhead_ril_audio
 PRODUCT_PACKAGES += libbullhead_cne_parcel
 
 # Opt-in VoLTE through the IMS compat bridge, off until both overlays are enabled.
+# BullheadImsWfcOverlay adds Wi-Fi calling on top of it.
 PRODUCT_PACKAGES += \
     BullheadImsFrameworkOverlay \
     BullheadImsPhoneOverlay \
+    BullheadImsWfcOverlay \
     ImsCompatBridge
 PRODUCT_PACKAGES += bullhead_gps_debug.conf
