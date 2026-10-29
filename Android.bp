@@ -18,3 +18,25 @@ install_symlink {
     installed_location: "etc/sound_trigger_platform_info.xml",
     symlink_target: "/vendor/etc/sound_trigger_platform_info.xml",
 }
+
+// netmgrd runs bare iptables, ip6tables and ndc; route them through the netutils wrapper
+install_symlink {
+    name: "netmgrd_iptables_symlink",
+    installed_location: "bin/netutils/iptables",
+    symlink_target: "/system/bin/netutils-wrapper-1.0",
+    vendor: true,
+}
+
+install_symlink {
+    name: "netmgrd_ip6tables_symlink",
+    installed_location: "bin/netutils/ip6tables",
+    symlink_target: "/system/bin/netutils-wrapper-1.0",
+    vendor: true,
+}
+
+install_symlink {
+    name: "netmgrd_ndc_symlink",
+    installed_location: "bin/netutils/ndc",
+    symlink_target: "/system/bin/netutils-wrapper-1.0",
+    vendor: true,
+}

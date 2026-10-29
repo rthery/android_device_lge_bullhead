@@ -345,6 +345,7 @@ service qti /vendor/bin/qti
 service netmgrd /vendor/bin/netmgrd
     class main
     group radio system wakelock
+    setenv PATH /vendor/bin/netutils:/product/bin:/apex/com.android.runtime/bin:/apex/com.android.art/bin:/system_ext/bin:/system/bin:/system/xbin:/odm/bin:/vendor/bin:/vendor/xbin
 
 service per_mgr /vendor/bin/pm-service
     class core

@@ -251,6 +251,12 @@ PRODUCT_PACKAGES += \
     libhidltransport \
     libhwbinder
 
+# netmgrd
+PRODUCT_PACKAGES += \
+    netmgrd_ip6tables_symlink \
+    netmgrd_iptables_symlink \
+    netmgrd_ndc_symlink
+
 # IMS
 PRODUCT_PACKAGES += \
     ims-ext-common \

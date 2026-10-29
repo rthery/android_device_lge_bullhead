@@ -85,3 +85,11 @@ dontaudit netmgrd netd_service:service_manager find;
 
 # iptables run by netmgrd searches bpffs; mobile data works without it.
 dontaudit netmgrd fs_bpf:dir search;
+
+# iptables and ndc run through the netutils wrapper; it maps a binary opened
+# by netmgrd and writes command output to netmgrd's socket.
+allow netutils_wrapper netmgrd:fd use;
+allow netutils_wrapper netmgrd:unix_stream_socket { getattr read write };
+allow netutils_wrapper netmgrd:fifo_file { getattr read write };
+# netmgrd's sockets leak across exec; the wrapper does not use them.
+dontaudit netutils_wrapper netmgrd:{ netlink_route_socket netlink_generic_socket netlink_xfrm_socket udp_socket tcp_socket } { read write };
