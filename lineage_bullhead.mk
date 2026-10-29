@@ -37,6 +37,10 @@ PRODUCT_MODEL := Nexus 5X
 PRODUCT_MANUFACTURER := LGE
 PRODUCT_RESTRICT_VENDOR_FILES := false
 
+# Compressed APEXes are decompressed to /data and mounted on dm-verity, and
+# each dm-bufio client vmallocs an 8 MiB hash table on this kernel.
+PRODUCT_COMPRESSED_APEX := false
+
 #PRODUCT_COPY_FILES += device/lge/bullhead/fstab.aosp_bullhead:root/fstab.bullhead
 
 $(call inherit-product, device/lge/bullhead/device.mk)
