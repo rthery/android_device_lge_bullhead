@@ -34,9 +34,10 @@ install_symlink {
     vendor: true,
 }
 
-install_symlink {
-    name: "netmgrd_ndc_symlink",
-    installed_location: "bin/netutils/ndc",
-    symlink_target: "/system/bin/netutils-wrapper-1.0",
+sh_binary {
+    name: "netmgrd_ndc",
+    src: "rootdir/bin/netmgrd-ndc.sh",
+    filename: "ndc",
+    sub_dir: "netutils",
     vendor: true,
 }

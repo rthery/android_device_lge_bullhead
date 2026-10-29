@@ -255,7 +255,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     netmgrd_ip6tables_symlink \
     netmgrd_iptables_symlink \
-    netmgrd_ndc_symlink
+    netmgrd_ndc
 
 # IMS
 PRODUCT_PACKAGES += \
