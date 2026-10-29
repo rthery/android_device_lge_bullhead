@@ -13,6 +13,20 @@ import android.telephony.ims.compat.feature.MMTelFeature;
  * pre-Oreo "ims" binder, which the framework no longer looks up, so each feature forwards there.
  */
 public class BridgeImsService extends ImsService {
+    private WifiInfoRelay mWifiInfoRelay;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mWifiInfoRelay = new WifiInfoRelay(this);
+        mWifiInfoRelay.start();
+    }
+
+    @Override
+    public void onDestroy() {
+        mWifiInfoRelay.stop();
+        super.onDestroy();
+    }
 
     @Override
     public MMTelFeature onCreateMMTelImsFeature(int slotId) {
