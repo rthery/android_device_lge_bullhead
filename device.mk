@@ -38,10 +38,6 @@ PRODUCT_AAPT_PREBUILT_DPI := xxhdpi xhdpi hdpi
 
 PRODUCT_CHARACTERISTICS := nosdcard
 
-# Dexpreopt
-WITH_DEXPREOPT := false
-WITH_DEXPREOPT_PIC := true
-
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/handheld_core_hardware.xml \
