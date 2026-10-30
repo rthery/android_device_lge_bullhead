@@ -172,8 +172,10 @@ public class LegacyMmTelFeature extends MMTelFeature {
     @Override
     public ImsUtImplBase getUtInterface() {
         try {
-            IImsUt ut = legacy().getUtInterface(mServiceId);
-            return ut == null ? null : new ImsUtImplBase() {
+            IImsUt legacyUt = legacy().getUtInterface(mServiceId);
+            if (legacyUt == null) return null;
+            IImsUt ut = new LegacyUt(legacyUt);
+            return new ImsUtImplBase() {
                 @Override
                 public IImsUt getInterface() {
                     return ut;
