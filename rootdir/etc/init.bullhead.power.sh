@@ -23,7 +23,6 @@ function get-set-forall() {
 # Drop the boot-time boost set at the end of this script
 if [ "$1" = "boot-completed" ]; then
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
-    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
     write /proc/sys/kernel/sched_boost 0
     exit 0
 fi
@@ -125,7 +124,6 @@ get-set-forall  /sys/class/devfreq/qcom,cpubw*/governor bw_hwmon
 
 # Run at full speed until boot completes
 write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 1440000
-write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 1824000
 write /proc/sys/kernel/sched_boost 1
 
 # re-enable thermal and BCL hotplug
