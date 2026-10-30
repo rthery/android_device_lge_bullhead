@@ -28,6 +28,9 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
+# Kernel 3.10 has no userfaultfd; the build cannot read the version of the inline-built kernel.
+PRODUCT_ENABLE_UFFD_GC := false
+
 # Recovery update from /vendor/etc/recovery.img
 $(call inherit-product, $(SRC_TARGET_DIR)/product/non_ab_device.mk)
 
