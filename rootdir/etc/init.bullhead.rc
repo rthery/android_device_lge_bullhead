@@ -116,6 +116,9 @@ on boot
     # execute script to set initial CPU settings
     # don't run as a service to avoid race conditions
     exec - root root system -- /vendor/bin/init.bullhead.power.sh
+    # The power HAL raises the GPU floor during interactions
+    chown system system /sys/class/kgsl/kgsl-3d0/min_pwrlevel
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/min_pwrlevel
 
     # update foreground cpuset now that processors are up
     # foreground gets all CPUs except CPU 3

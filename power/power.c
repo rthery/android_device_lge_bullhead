@@ -37,6 +37,8 @@
 #include <fcntl.h>
 #include <dlfcn.h>
 #include <stdlib.h>
+#include <pthread.h>
+#include <time.h>
 
 #define LOG_TAG "QCOMPowerHAL"
 #include <log/log.h>
@@ -72,6 +74,76 @@
 //interaction boost global variables
 static pthread_mutex_t s_interaction_lock = PTHREAD_MUTEX_INITIALIZER;
 static struct timespec s_previous_boost_timespec;
+
+#define GPU_MIN_PWRLEVEL "/sys/class/kgsl/kgsl-3d0/min_pwrlevel"
+// Level 1 is 490 MHz; msm-adreno-tz keeps scrolling at 180-367 MHz otherwise.
+#define GPU_BOOST_PWRLEVEL "1"
+
+static pthread_mutex_t s_gpu_boost_lock = PTHREAD_MUTEX_INITIALIZER;
+static pthread_cond_t s_gpu_boost_cond;
+static struct timespec s_gpu_boost_end;
+static char s_gpu_idle_pwrlevel[8];
+static int s_gpu_boost_started;
+
+static void *gpu_boost_thread(void *arg __unused)
+{
+    struct timespec now;
+
+    pthread_mutex_lock(&s_gpu_boost_lock);
+    for (;;) {
+        while (s_gpu_boost_end.tv_sec == 0)
+            pthread_cond_wait(&s_gpu_boost_cond, &s_gpu_boost_lock);
+        sysfs_write(GPU_MIN_PWRLEVEL, GPU_BOOST_PWRLEVEL);
+        // the deadline moves forward while interactions keep coming
+        do {
+            pthread_cond_timedwait(&s_gpu_boost_cond, &s_gpu_boost_lock, &s_gpu_boost_end);
+            clock_gettime(CLOCK_MONOTONIC, &now);
+        } while (now.tv_sec < s_gpu_boost_end.tv_sec ||
+                (now.tv_sec == s_gpu_boost_end.tv_sec && now.tv_nsec < s_gpu_boost_end.tv_nsec));
+        sysfs_write(GPU_MIN_PWRLEVEL, s_gpu_idle_pwrlevel);
+        s_gpu_boost_end.tv_sec = 0;
+    }
+    return NULL;
+}
+
+static void gpu_boost(int duration_ms)
+{
+    struct timespec end;
+    pthread_condattr_t attr;
+    pthread_t thread;
+
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    end.tv_sec += duration_ms / 1000;
+    end.tv_nsec += (duration_ms % 1000) * 1000000L;
+    if (end.tv_nsec >= 1000000000L) {
+        end.tv_sec++;
+        end.tv_nsec -= 1000000000L;
+    }
+
+    pthread_mutex_lock(&s_gpu_boost_lock);
+    if (!s_gpu_boost_started) {
+        if (sysfs_read(GPU_MIN_PWRLEVEL, s_gpu_idle_pwrlevel, sizeof(s_gpu_idle_pwrlevel)) < 0) {
+            pthread_mutex_unlock(&s_gpu_boost_lock);
+            return;
+        }
+        pthread_condattr_init(&attr);
+        pthread_condattr_setclock(&attr, CLOCK_MONOTONIC);
+        pthread_cond_init(&s_gpu_boost_cond, &attr);
+        pthread_condattr_destroy(&attr);
+        if (pthread_create(&thread, NULL, gpu_boost_thread, NULL) != 0) {
+            pthread_mutex_unlock(&s_gpu_boost_lock);
+            return;
+        }
+        pthread_detach(thread);
+        s_gpu_boost_started = 1;
+    }
+    if (end.tv_sec > s_gpu_boost_end.tv_sec ||
+            (end.tv_sec == s_gpu_boost_end.tv_sec && end.tv_nsec > s_gpu_boost_end.tv_nsec)) {
+        s_gpu_boost_end = end;
+        pthread_cond_signal(&s_gpu_boost_cond);
+    }
+    pthread_mutex_unlock(&s_gpu_boost_lock);
+}
 
 const char *parameter_names[] = {
     "vlow_count",
@@ -325,6 +397,7 @@ static void power_hint(struct power_module *module, power_hint_t hint,
                 }
             }
 
+            gpu_boost(duration);
             handle_little = interaction_with_handle(handle_little,duration, sizeof(resources)/sizeof(resources[0]), resources);
             handle_big = interaction_with_handle(handle_big, duration_big, sizeof(resources_big)/sizeof(resources_big[0]), resources_big);
             handle_downmigrate = interaction_with_handle(handle_downmigrate, duration_downmigrate, sizeof(resources_downmigrate)/sizeof(resources_downmigrate[0]), resources_downmigrate);
