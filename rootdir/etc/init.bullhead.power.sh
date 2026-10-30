@@ -20,6 +20,14 @@ function get-set-forall() {
 
 ################################################################################
 
+# Drop the boot-time boost set at the end of this script
+if [ "$1" = "boot-completed" ]; then
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
+    write /proc/sys/kernel/sched_boost 0
+    exit 0
+fi
+
 # take the A57s offline when thermal hotplug is disabled
 write /sys/devices/system/cpu/cpu4/online 0
 write /sys/devices/system/cpu/cpu5/online 0
@@ -115,8 +123,10 @@ write /proc/sys/kernel/sched_upmigrate_min_nice 9
 
 get-set-forall  /sys/class/devfreq/qcom,cpubw*/governor bw_hwmon
 
-# Disable sched_boost
-write /proc/sys/kernel/sched_boost 0
+# Run at full speed until boot completes
+write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 1440000
+write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 1824000
+write /proc/sys/kernel/sched_boost 1
 
 # re-enable thermal and BCL hotplug
 write /sys/module/msm_thermal/core_control/enabled 1
