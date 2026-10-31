@@ -11,3 +11,6 @@ allow platform_app debugfs_kgsl:file { read write getattr setattr };
 
 # NFC
 allow platform_app nfc_service:service_manager { find };
+
+# About phone 4-core mode tile (BullheadBlodStatus)
+get_prop(platform_app, bullhead_blod_prop)
