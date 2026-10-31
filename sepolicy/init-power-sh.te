@@ -32,3 +32,9 @@ allow init-power-sh sysfs:dir { read search open };
 allow init-power-sh sysfs_kgsl:dir search;
 
 allow init-power-sh vendor_file:dir r_dir_perms;
+
+# 4-core mode (BLOD): flag in /cache, blocked CPUs knob, cpuset property
+allow init-power-sh cache_file:dir search;
+allow init-power-sh cache_file:file getattr;
+allow init-power-sh sysfs_cpu_blocked:file w_file_perms;
+set_prop(init-power-sh, bullhead_blod_prop)

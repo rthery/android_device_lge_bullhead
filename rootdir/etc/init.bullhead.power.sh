@@ -31,6 +31,15 @@ fi
 write /sys/devices/system/cpu/cpu4/online 0
 write /sys/devices/system/cpu/cpu5/online 0
 
+# 4-core mode for units with a faulty A57 cluster (BLOD), set from recovery
+if [ -e /cache/blod ]; then
+    blod=1
+    write /sys/module/cpu/parameters/blocked_cpus 4-5
+    setprop vendor.bullhead.blod 1
+else
+    blod=0
+fi
+
 # disable thermal bcl hotplug to switch governor
 write /sys/module/msm_thermal/core_control/enabled 0
 get-set-forall /sys/devices/soc.0/qcom,bcl.*/mode disable
@@ -76,6 +85,7 @@ write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
 write /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 80000
 write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
 
+if [ $blod = 0 ]; then
 # online CPU4
 write /sys/devices/system/cpu/cpu4/online 1
 
@@ -99,6 +109,7 @@ copy /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq /sys/devices/system/c
 
 # plugin remaining A57s
 write /sys/devices/system/cpu/cpu5/online 1
+fi
 
 # Restore CPU 4 max freq from msm_performance
 write /sys/module/msm_performance/parameters/cpu_max_freq "4:4294967295 5:4294967295"

@@ -4,6 +4,7 @@ type debugfs_ipc, fs_type, debugfs_type;
 type debugfs_bufinfo, fs_type, debugfs_type;
 
 type sysfs_power_management, fs_type, sysfs_type;
+type sysfs_cpu_blocked, fs_type, sysfs_type;
 type sysfs_surfaceflinger, fs_type, sysfs_type;
 
 type sysfs_rndis, fs_type, sysfs_type;

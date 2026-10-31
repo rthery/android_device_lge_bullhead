@@ -18,6 +18,7 @@ audio_hal.                         u:object_r:bullhead_audio_prop:s0
 ro.qc.sdk.audio.                   u:object_r:bullhead_audio_prop:s0
 persist.speaker.prot.              u:object_r:bullhead_audio_prop:s0
 ro.min_freq_                       u:object_r:bullhead_perf_prop:s0
+vendor.bullhead.blod               u:object_r:bullhead_blod_prop:s0
 vendor.wlan.                       u:object_r:bullhead_wlan_prop:s0
 persist.audio.fluence.             u:object_r:bullhead_audio_prop:s0
 sys.hwc.                           u:object_r:bullhead_display_prop:s0

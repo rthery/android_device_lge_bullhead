@@ -115,7 +115,7 @@ on boot
     chmod 0660 /sys/devices/soc.0/f9924000.i2c/i2c-2/2-0020/wake_gesture
     # execute script to set initial CPU settings
     # don't run as a service to avoid race conditions
-    exec - root root system -- /vendor/bin/init.bullhead.power.sh
+    exec - root root system cache -- /vendor/bin/init.bullhead.power.sh
     # The power HAL raises the GPU floor during interactions
     chown system system /sys/class/kgsl/kgsl-3d0/min_pwrlevel
     chmod 0664 /sys/class/kgsl/kgsl-3d0/min_pwrlevel
@@ -212,6 +212,10 @@ on boot
 
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
+
+on property:vendor.bullhead.blod=1
+    # 4-core mode (A57s kept offline): foreground runs on all A53s
+    write /dev/cpuset/foreground/cpus 0-3
 
 on post-fs
     # Wait qseecomd started
