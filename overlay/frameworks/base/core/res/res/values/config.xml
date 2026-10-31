@@ -376,7 +376,7 @@
     <!-- Whether to cancel fingerprint operation if not idle -->
     <bool name="config_fpCancelIfNotIdle">true</bool>
 
-    <!-- Half the computed in-kernel LMK levels (cached apps from 315 to 157 MiB);
-         zram absorbs the rest. -->
-    <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">161280</integer>
+    <!-- 3/4 of the computed in-kernel LMK levels (cached apps from 315 to 236 MiB);
+         at half, a runaway foreground app was never killed. -->
+    <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">241920</integer>
 </resources>
