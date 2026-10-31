@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 Romain Théry
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="title">4-core mode (BLOD)</string>
+    <string name="summary_on">On: cores 4-5 disabled</string>
+    <string name="summary_off">Off</string>
+    <string name="explanation">Keeps the big cores (4-5) off to work around the bootloop of death. Turn it on or off in recovery, under Advanced.</string>
+</resources>

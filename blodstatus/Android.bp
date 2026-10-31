@@ -1,0 +1,14 @@
+//
+// SPDX-FileCopyrightText: 2026 Romain Théry
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_app {
+    name: "BullheadBlodStatus",
+    srcs: ["src/**/*.java"],
+    certificate: "platform",
+    platform_apis: true,
+    optimize: {
+        enabled: false,
+    },
+}

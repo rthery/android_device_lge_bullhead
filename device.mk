@@ -357,6 +357,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/init.bullhead.power.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.bullhead.power.sh
 
+# 4-core mode (BLOD) status in About phone
+PRODUCT_PACKAGES += \
+    BullheadBlodStatus
+
 # RenderScript HAL
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
