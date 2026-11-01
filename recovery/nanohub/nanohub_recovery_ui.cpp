@@ -22,6 +22,7 @@
 #include <string.h>
 #include <sys/mount.h>
 
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -131,7 +132,19 @@ const std::vector<std::string>& Nanohub_Device::GetMenuItems()
 Device::BuiltinAction Nanohub_Device::InvokeMenuItem(size_t menu_position)
 {
     if (InAdvancedMenu() && menu_position == Device::GetMenuItems().size()) {
-        WriteBlodMode(!blod_mode_);
+        bool enable = !blod_mode_;
+        std::vector<std::string> headers{
+            enable ? "Turn 4-core mode on?" : "Turn 4-core mode off?",
+            enable ? "Cores 4-5 stay off from the next boot."
+                   : "Only for phones without the bootloop of death.",
+        };
+        std::vector<std::string> items{ " Cancel", enable ? " Turn on" : " Turn off" };
+        size_t chosen = GetUI()->ShowMenu(
+                headers, items, 0, true,
+                std::bind(&Device::HandleMenuKey, this, std::placeholders::_1,
+                          std::placeholders::_2));
+        if (chosen == 1)
+            WriteBlodMode(enable);
         return NO_ACTION;
     }
     return Device::InvokeMenuItem(menu_position);
