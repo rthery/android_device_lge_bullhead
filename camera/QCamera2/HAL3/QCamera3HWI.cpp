@@ -1385,6 +1385,25 @@ int QCamera3HardwareInterface::configureStreamsPerfLocked(
         m_bEisEnable = false;
     }
 
+    /* The EIS 2.0 backend crops processed streams with the video stream's
+     * field of view, so a preview of another aspect ratio stops updating. */
+    for (size_t i = 0; m_bEisEnable && i < streamList->num_streams; i++) {
+        camera3_stream_t *newStream = streamList->streams[i];
+        if (newStream->stream_type == CAMERA3_STREAM_INPUT ||
+                (newStream->usage & private_handle_t::PRIV_FLAGS_VIDEO_ENCODER) ||
+                (newStream->format != HAL_PIXEL_FORMAT_IMPLEMENTATION_DEFINED &&
+                newStream->format != HAL_PIXEL_FORMAT_YCbCr_420_888)) {
+            continue;
+        }
+        if ((uint64_t)newStream->width * videoHeight !=
+                (uint64_t)newStream->height * videoWidth) {
+            ALOGI("%s: %ux%u stream does not match %ux%u video, EIS off",
+                    __func__, newStream->width, newStream->height,
+                    videoWidth, videoHeight);
+            m_bEisEnable = false;
+        }
+    }
+
     /* Logic to enable/disable TNR based on specific config size/etc.*/
     if ((m_bTnrPreview || m_bTnrVideo) && m_bIsVideo &&
             ((videoWidth == 1920 && videoHeight == 1080) ||
