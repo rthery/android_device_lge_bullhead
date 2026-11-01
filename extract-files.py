@@ -262,7 +262,7 @@ PROCESSGROUP_BLOBS = {
 }
 
 # strdup8to16, gone from libcutils.
-DPMFRAMEWORK_SHIM_BLOBS = {
+CUTILS_SHIM_BLOBS = {
     'vendor/lib/libcne.so',
 }
 
@@ -284,7 +284,7 @@ LEGACY_LIBC_BLOBS = sorted(
     LIBC_PRIVATE_BLOBS
     | LIBLOG_BLOBS
     | PROCESSGROUP_BLOBS
-    | DPMFRAMEWORK_SHIM_BLOBS
+    | CUTILS_SHIM_BLOBS
     | CNE_PARCEL_BLOBS
     | CNE_PARCEL_FIRST_BLOBS
 )
@@ -305,8 +305,8 @@ def legacy_libc_fixup(path: str) -> blob_fixup:
         fixup = fixup.add_needed('liblog.so')
     if path in PROCESSGROUP_BLOBS:
         fixup = fixup.add_needed('libprocessgroup.so')
-    if path in DPMFRAMEWORK_SHIM_BLOBS:
-        fixup = fixup.add_needed('libshim_dpmframework.so')
+    if path in CUTILS_SHIM_BLOBS:
+        fixup = fixup.add_needed('libcutils_shim.so')
     if path in CNE_PARCEL_BLOBS:
         fixup = fixup.replace_needed('libbinder.so', 'libbullhead_cne_parcel.so')
     if path in CNE_PARCEL_FIRST_BLOBS:
@@ -322,12 +322,12 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/bin/ATFWD-daemon': blob_fixup()
         # strdup8to16, gone from libcutils.
         .patchelf_version(PATCHELF_VERSION)
-        .add_needed('libshim_dpmframework.so')
+        .add_needed('libcutils_shim.so')
         .add_needed('liblog.so'),
     'vendor/lib64/libcne.so': blob_fixup()
         # strdup8to16, gone from libcutils.
         .patchelf_version(PATCHELF_VERSION)
-        .add_needed('libshim_dpmframework.so')
+        .add_needed('libcutils_shim.so')
         .add_needed('liblog.so')
         # Its stack Parcel slot is sized for 8.1; the Android 15 Parcel overruns it.
         .replace_needed('libbinder.so', 'libbullhead_cne_parcel.so'),

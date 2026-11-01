@@ -422,7 +422,7 @@ endif
 # Shims
 PRODUCT_PACKAGES += \
     libbullhead_audiosystem_shim \
-    libshim_dpmframework \
+    libcutils_shim.vendor \
     libshim_sensor \
     libprotobuf_shim \
     libc_mutexdestroy_shim

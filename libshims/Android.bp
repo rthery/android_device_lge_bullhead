@@ -12,15 +12,6 @@ cc_library_shared {
     shared_libs: ["libaudioclient"],
 }
 
-cc_library {
-    name: "libshim_dpmframework",
-    srcs: [
-        "strdup16to8.cpp",
-        "strdup8to16.cpp",
-    ],
-    vendor: true,
-}
-
 cc_library_shared {
     srcs: ["sensor.cpp"],
     shared_libs: [
