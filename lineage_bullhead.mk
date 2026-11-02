@@ -52,8 +52,9 @@ PRODUCT_PACKAGES += \
 
 
 # This custom build uses its own OTA feed, a GitHub release asset per ROM, Android base and device.
+# The value must stay within 91 bytes.
 PRODUCT_SYSTEM_PROPERTIES += \
-    lineage.updater.uri=https://github.com/rthery/android_builds/releases/download/ota-feed/lineage-22.2-{device}-{type}.json
+    lineage.updater.uri=https://github.com/rthery/android_builds/releases/download/ota-feed/lineage22-{device}.json
 
 # Hash of the resolved source manifest, the same for every variant built from these sources.
 ifneq ($(ANDROID_BUILDS_SOURCE_ID),)
