@@ -136,9 +136,6 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
     android.hardware.bluetooth@1.0-service
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.bt.bdaddr_path=/persist/bdaddr.txt
-
 # Charger
 PRODUCT_PACKAGES += \
     charger_res_images
@@ -382,7 +379,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     telephony-ext
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+PRODUCT_VENDOR_PROPERTIES += \
     persist.radio.snapshot_enabled=1 \
     persist.radio.snapshot_timer=10
 
@@ -459,7 +456,7 @@ PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
 
 # OEM Unlock reporting
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+PRODUCT_VENDOR_PROPERTIES += \
     ro.oem_unlock_supported=1
 
 # Vibrator HAL
