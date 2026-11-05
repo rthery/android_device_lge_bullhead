@@ -187,6 +187,10 @@ PRODUCT_SYSTEM_PROPERTIES += \
     ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
     ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
 
+# Top app UI thread and RenderThread run SCHED_FIFO
+PRODUCT_SYSTEM_PROPERTIES += \
+    sys.use_fifo_ui=1
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
