@@ -191,6 +191,10 @@ PRODUCT_SYSTEM_PROPERTIES += \
 PRODUCT_SYSTEM_PROPERTIES += \
     sys.use_fifo_ui=1
 
+# Pre-forked app processes (USAP pool) on the 64-bit zygote
+PRODUCT_SYSTEM_PROPERTIES += \
+    dalvik.vm.usap_pool_enabled=true
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
