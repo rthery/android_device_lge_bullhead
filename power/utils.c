@@ -291,6 +291,12 @@ void undo_hint_action(int hint_id)
     }
 }
 
+void release_request(int lock_handle)
+{
+    if (qcopt_handle && perf_lock_rel && lock_handle > 0)
+        perf_lock_rel(lock_handle);
+}
+
 /*
  * Used to release initial lock holding
  * two cores online when the display is on

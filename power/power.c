@@ -41,6 +41,7 @@
 #include <time.h>
 
 #define LOG_TAG "QCOMPowerHAL"
+#include <cutils/properties.h>
 #include <log/log.h>
 #include <hardware/hardware.h>
 #include <hardware/power.h>
@@ -303,6 +304,35 @@ int __attribute__ ((weak)) power_hint_override(struct power_module *module, powe
 int interaction(int duration, int num_args, int opt_list[]);
 int interaction_with_handle(int lock_handle, int duration, int num_args, int opt_list[]);
 
+// Cap in case the framework never sends the end of the launch.
+#define LAUNCH_BOOST_MAX_MS 3000
+
+static pthread_mutex_t s_launch_lock = PTHREAD_MUTEX_INITIALIZER;
+static int s_launch_handle;
+
+static void process_launch_hint(void *data)
+{
+    // A53s at max, upmigrate 20 / downmigrate 10, sched_boost and an A57 floor of 1248 MHz
+    // until the first frame.
+    // Downmigrate goes first: the kernel rejects an upmigrate below the current downmigrate.
+    // sched_boost lets HMP place RT tasks (FIFO UI threads) on the A57s.
+    // The last two are A57-only, so 4-core mode (A57s offline) drops them.
+    int resources[] = {CPU0_MIN_FREQ_TURBO_MAX, 0x4F0A, 0x4E14, SCHED_BOOST_ON, 0x1F0C};
+    int num_resources = sizeof(resources) / sizeof(resources[0]);
+
+    pthread_mutex_lock(&s_launch_lock);
+    if (!data) {
+        release_request(s_launch_handle);
+        s_launch_handle = 0;
+    } else {
+        if (property_get_bool("vendor.bullhead.blod", false))
+            num_resources -= 2;
+        s_launch_handle = interaction_with_handle(s_launch_handle, LAUNCH_BOOST_MAX_MS,
+                num_resources, resources);
+    }
+    pthread_mutex_unlock(&s_launch_lock);
+}
+
 static long long calc_timespan_us(struct timespec start, struct timespec end) {
     long long diff_in_us = 0;
     diff_in_us += (end.tv_sec - start.tv_sec) * USINSEC;
@@ -403,6 +433,9 @@ static void power_hint(struct power_module *module, power_hint_t hint,
             handle_downmigrate = interaction_with_handle(handle_downmigrate, duration_downmigrate, sizeof(resources_downmigrate)/sizeof(resources_downmigrate[0]), resources_downmigrate);
             handle_upmigrate = interaction_with_handle(handle_upmigrate, duration_upmigrate, sizeof(resources_upmigrate)/sizeof(resources_upmigrate[0]), resources_upmigrate);
         }
+        break;
+        case POWER_HINT_LAUNCH:
+            process_launch_hint(data);
         break;
         case POWER_HINT_VIDEO_ENCODE:
             process_video_encode_hint(data);
