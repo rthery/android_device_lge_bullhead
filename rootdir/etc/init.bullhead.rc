@@ -66,7 +66,6 @@ on property:sys.boot_completed=1
     exec_background - root root system -- /vendor/bin/init.bullhead.power.sh boot-completed
 
     restart cameraserver
-    restart vendor.camera-provider-2-4
 
 on init
     # NXP HAL expects /dev/pn54x
@@ -481,6 +480,8 @@ on property:apexd.status=ready
 
 on property:init.svc.cameraserver=restarting
     restart qcamerasvr
+    # The provider keeps state from the daemon it first talks to
+    restart vendor.camera-provider-2-4
 
 on property:init.svc.servicemanager=restarting
     restart qcamerasvr
